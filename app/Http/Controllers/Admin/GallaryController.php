@@ -25,8 +25,11 @@ class GallaryController extends Controller
         $lastId=  Gallary::latest('id')->first(); 
         $data = $request->file('file');
         foreach ($data as $files) {
-                    $filed = $files->move(public_path('storage/image'));
-        $files =$files->getClientOriginalName();
+         $files = $files->move(public_path().'storage/image',  '-' . $files->getClientOriginalName());
+
+        // $files =$files->getClientOriginalName();
+        // $imagepart = $files->move(public_path('storage/image'));
+
         GallaryDetile::create([
             'filename' => $files,
             "gallary_id"=>$lastId->id,

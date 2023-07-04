@@ -11,45 +11,54 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div style="margin-bottom: 10px; margin-top: 30px" class="row">
-            <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.events.create') }}">
-                    Add Events
-                </a>
-                <a class="btn btn-success" href="{{ route('admin.eventsType.index') }}">
-                    Add Type
-                </a>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            Events
         </div>
-
-        <div class="modal fade" id="reModal" tabindex="-1" aria-labelledby="reModalLabel">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="reModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="card-body">
+            <div class="container-md">
+                <div style="margin-bottom: 10px; margin-top: 30px" class="row">
+                    <div class="col-lg-12">
+                        <a class="btn btn-success" href="{{ route('admin.events.create') }}">
+                            Add Events
+                        </a>
+                        <a class="btn btn-success" href="{{ route('admin.eventsType.index') }}">
+                            Add Acction
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="panel panel-primary ">
-            <div class="panel-heading mt-4 pt-5">
-                Events
-            </div>
-            <div class="panel-body">
-                <div id='calendar'></div>
-            </div>
-        </div>
 
+                <div class="modal fade" id="reModal" tabindex="-1" aria-labelledby="reModalLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary ">
+                    <div class="panel-heading mt-4 pt-5">
+                        Events
+                    </div>
+                    <div class="panel-body">
+                        <div id='calendar'></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
 </body>
 
 
