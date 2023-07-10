@@ -11,6 +11,21 @@
 </head>
 
 <body>
+    <div id="calendarModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span
+                            class="sr-only">close</span></button>
+                    <h4 id="modalTitle" class="modal-title"></h4>
+                </div>
+                <div id="modalBody" class="modal-body"> </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-header">
             Events
@@ -82,39 +97,25 @@
             },
             selectable: true,
             selectHelper: true,
-            select: function(start, end, allDay) {
-                if (title) {
-                    var start = moment(start, 'DD.MM.YYYY').format('YYYY-MM-DD');
-                    var end = moment(end, 'DD.MM.YYYY').format('YYYY-MM-DD');
-                    $.ajax({
-                        url: "events",
-                        data: "title=" + title + "&start=" + start + "&end=" + end +
-                            '&_token=' +
-                            "{{ csrf_token() }}",
-                        type: "POST",
-                        success: function(data) {
-                            $('#calendar').fullCalendar('refetchEvents');
-                        },
-                        error: function(data) {
-                            console.log(data);
-                        }
-                    });
-                }
-            },
             eventClick: function(event) {
-                var deleteMsg = confirm("Do you really want to delete?");
-                if (deleteMsg) {
-                    $.ajax({
-                        type: "DELETE",
-                        url: "events",
-                        data: "id=" + event.id + '&_token=' + "{{ csrf_token() }}",
-                        success: function(response) {
-                            if (parseInt(response) > 0) {
-                                $('#calendar').fullCalendar('removeEvents', event.id);
-                            }
-                        }
-                    });
-                }
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    type: "GET",
+                    dataType: 'html',
+                    success: function(data) {
+                        console.log("on Event have been Erro");
+                        $('#calendar').fullCalendar('refetchEvents');
+                        window.location.assign(
+                            "events/" + event.id +
+                            "/edit");
+                    },
+                    error: function(data) {
+                        console.log("on Event have been Erro");
+                    }
+                });
+
             }
         });
     });

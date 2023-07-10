@@ -63,6 +63,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\UsersController' => $baseDir . '/app/Http/Controllers/Admin/UsersController.php',
     'App\\Http\\Controllers\\Admin\\dlpController' => $baseDir . '/app/Http/Controllers/Admin/dlpController.php',
     'App\\Http\\Controllers\\Api02\\EventsController' => $baseDir . '/app/Http/Controllers/Api02/EventsController.php',
+    'App\\Http\\Controllers\\Api02\\GallaryController' => $baseDir . '/app/Http/Controllers/Api02/GallaryController.php',
     'App\\Http\\Controllers\\Api\\V1\\Admin\\AnnouncementApiController' => $baseDir . '/app/Http/Controllers/Api/V1/Admin/AnnouncementApiController.php',
     'App\\Http\\Controllers\\Api\\V1\\Admin\\AttendanceApiController' => $baseDir . '/app/Http/Controllers/Api/V1/Admin/AttendanceApiController.php',
     'App\\Http\\Controllers\\Api\\V1\\Admin\\CallingApiController' => $baseDir . '/app/Http/Controllers/Api/V1/Admin/CallingApiController.php',

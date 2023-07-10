@@ -13,5 +13,6 @@ class Gallary extends Model
     protected $fillable = [
         'name',
         'description',
+        'event_date',
     ];
 }

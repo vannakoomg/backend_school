@@ -18,10 +18,12 @@
                     <input type="text" class="form-control" name="description" id="description"
                         value="<?php echo e($gallary->description, false); ?>" />
                 </div>
-                <button class="btn btn-success mt-4" type="submit" id="update-btn">
-                    <?php echo e(trans('global.save'), false); ?>
+                <div class="form-group">
+                    <button class="btn btn-success mt-4" type="submit" id="update-btn">
+                        <?php echo e(trans('global.save'), false); ?>
 
-                </button>
+                    </button>
+                </div>
             </form>
 
         </div>

@@ -6,27 +6,65 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Gallary;
 use App\GallaryDetile;
+use DateTime;
+
 class GallaryController extends Controller
 {
     public function getGallary(Request $request){
-        $data = collect();
+        $data = collect([]);
         if(empty($request->id)){
-        $gallary = Gallary::all();
+        $gallary = Gallary::all()->sortByDesc('event_date');
         foreach($gallary as $key =>$gal){
-            $image = GallaryDetile::all()->where('gallary_id','=',$gal->id)->first()->filename;
-            $data->push([
-                "id"=>$gal->id,
-                "title"=>$gal->name,
-                "image"=> asset('storage/image' . $image),
-                "date"=>$gal->created_at->format('Y-m-d')
+            if(empty( GallaryDetile::all()->where('gallary_id','=',$gal->id)->first()->filename))
+            {
+            $image='';
+            }else{
+                $image= asset('storage/image/' .  GallaryDetile::all()->where('gallary_id','=',$gal->id)->first()->filename);
+            }
+            $time  = new DateTime($gal->event_date);
+            $galddd = collect([]);
+            $galddd->push([
+                    "id"=>$gal->id,
+                        "title"=>$gal->name,
+                        "image"=> $image,
+                        "date"=>$time->format('Y-m-d'),
+                ],);
+            if($data->isEmpty()){
+                $data->push([
+                "year_month"=>$time->format('Y-m'),
+                "gallary"=>$galddd,
+            ]);
+            }else{
+                $isdulicat =0;
+                foreach($data as $key =>$dataAll){
+                    if($data[$key]["year_month"]==$time->format('Y-m')){
+                    $data[$key]['gallary']->push([
+                        "id"=>$gal->id,
+                        "title"=>$gal->name,
+                        "image"=> $image,
+                        "date"=>$time->format('Y-m-d'),
+                    ]);
+                    $isdulicat =1;
+                    break 1;
+                }
+            }
+            if( $isdulicat ==0){
+                $data->push([
+                "year_month"=>$time->format('Y-m'),
+                "gallary"=>$galddd
             ]);}
+            }
+        }
         }else{
             $gallary = GallaryDetile::all()->where('gallary_id','=',$request->id);
             foreach($gallary as $key =>$gal){
             $data->push([
-                "image"=>asset('storage/image' . $gal->filename),
+                "image"=>asset('storage/image/' . $gal->filename),
             ]);
             }
+            $data->push([
+                "image"=>"",
+            ]);
         }
         return response()->json([
             "data"=>$data

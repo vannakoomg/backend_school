@@ -16,6 +16,13 @@
                     <label class="" for="description">Description</label>
                     <input type="text" class="form-control" name="description" id="description" />
                 </div>
+
+                <div class="form-group">
+                    <label class="" for="event_date">Event Date </label>
+                    <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"
+                        value="">
+                </div>
+
             </form>
             <button class="btn btn-success mt-3  pl-4 pr-4" type="submit" id="uploadfiles">
                 <?php echo e(trans('global.save'), false); ?>
@@ -51,6 +58,11 @@
         });
         $('#uploadfiles').click(function() {
             myDropzone.processQueue();
+        });
+        $(function() {
+            $('.datetimepicker').datetimepicker({
+                format: 'YYYY/MM/DD'
+            });;
         });
     </script>
 <?php $__env->stopSection(); ?>

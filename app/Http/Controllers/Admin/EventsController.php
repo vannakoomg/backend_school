@@ -38,9 +38,31 @@ class EventsController extends Controller
         return redirect('admin/events');      
     }
     public function destroy(Request $request){
+      return 0;
       $result = Event::find($request->id);
       $result->delete();
       return $request->id;
     }
+    public function edit(Request $request){
+      $event= Event::find($request->id);
+      $eventsType = EventsType::all();
+      $endddd  = new DateTime($event->end);
+      $endddd= $endddd->modify('-1 day' )->format('Y-m-d');
+      return view('admin.events.edit', compact('eventsType',"event","endddd"));
+    }
+    public function update(Request $request){
+      $event  = Event::find($request->id);
+        $end  = new DateTime($request->end_date);
+        $end= $end->modify('+1 day' );
+         $event->update([
+        "title"=>$request->title,
+        "start"=>$request->startdate,
+        "end"=> $end,
+        "action"=>$request->action+1,
+        "time"=>$request->time,
+      ]);  
+       return redirect('admin/events');  
+    }    
+
     
 }

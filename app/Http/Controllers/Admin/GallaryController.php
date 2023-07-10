@@ -10,31 +10,33 @@ use App\Image;
 class GallaryController extends Controller
 { 
     public function index() { 
-        $gallary = Gallary::all();
+        $gallary = Gallary::all()->sortByDesc('event_date');;
         return view('admin.gallary.index' , compact("gallary"));
     }
     public function create(){
         return view('admin.gallary.create');
     }
     public function store(Request $request) { 
+        
         $data = array(
             "name"=>$request->title,
             "description"=>$request->description,
+            "event_date"=>$request->event_date,
         );
         Gallary::create($data);
         $lastId=  Gallary::latest('id')->first(); 
         $data = $request->file('file');
         foreach ($data as $files) {
-         $files = $files->move(public_path().'storage/image',  '-' . $files->getClientOriginalName());
-
-        // $files =$files->getClientOriginalName();
-        // $imagepart = $files->move(public_path('storage/image'));
-
+        $filename = $files->getClientOriginalName();
+        $files = $files->move(public_path().'storage/image',$files->getClientOriginalName());
         GallaryDetile::create([
-            'filename' => $files,
+            'filename' => $filename,
             "gallary_id"=>$lastId->id,
         ]);
         }
+        $gallary = Gallary::all();
+        return view('admin.gallary.index' , compact("gallary"));
+  
     }
     public function edit(Request $request){
         $gallary = Gallary::find($request->id);
@@ -52,15 +54,15 @@ class GallaryController extends Controller
         if(!empty($request->file('file'))){
         $data = $request->file('file');
         foreach ($data as $files) {
-        $filed = $files->move(public_path('storage/image'));
+        $filed = $files->move(public_path('/storage/image/'));
         $files =$files->getClientOriginalName();
         GallaryDetile::create([
             'filename' => $files,
             "gallary_id"=>"$id",
-        ]);
+            ]);
         }
         }
-        $gallary = Gallary::all();
+        $gallary = Gallary::all()->sortByDesc('event_date');;
         return view('admin.gallary.index' , compact("gallary"));
     }
     public function destroy(Request $request ){

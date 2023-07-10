@@ -18,9 +18,11 @@
                     <input type="text" class="form-control" name="description" id="description"
                         value="{{ $gallary->description }}" />
                 </div>
-                <button class="btn btn-success mt-4" type="submit" id="update-btn">
-                    {{ trans('global.save') }}
-                </button>
+                <div class="form-group">
+                    <button class="btn btn-success mt-4" type="submit" id="update-btn">
+                        {{ trans('global.save') }}
+                    </button>
+                </div>
             </form>
 
         </div>

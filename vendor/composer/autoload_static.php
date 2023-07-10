@@ -828,6 +828,7 @@ class ComposerStaticInit9f214bec2257c161f2fef825eb03de6b
         'App\\Http\\Controllers\\Admin\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UsersController.php',
         'App\\Http\\Controllers\\Admin\\dlpController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/dlpController.php',
         'App\\Http\\Controllers\\Api02\\EventsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api02/EventsController.php',
+        'App\\Http\\Controllers\\Api02\\GallaryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api02/GallaryController.php',
         'App\\Http\\Controllers\\Api\\V1\\Admin\\AnnouncementApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Admin/AnnouncementApiController.php',
         'App\\Http\\Controllers\\Api\\V1\\Admin\\AttendanceApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Admin/AttendanceApiController.php',
         'App\\Http\\Controllers\\Api\\V1\\Admin\\CallingApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Admin/CallingApiController.php',
