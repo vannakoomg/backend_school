@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Event;
 use DateTime;
 use App\EventsType;
+use App\Http\Resources\EventResource;
 
 
 class EventsController extends Controller
@@ -19,7 +20,9 @@ class EventsController extends Controller
       return view('admin.events.create', compact('eventsType'));
     }
     public function getEvent(){
-      $events = Event::all();
+    $events =new EventResource(Event::all());
+      dd($events);
+      // dd($events);
       return $events;
     }
     public function store(Request $request){
@@ -38,7 +41,7 @@ class EventsController extends Controller
         return redirect('admin/events');      
     }
     public function destroy(Request $request){
-      return 0;
+      return $request;
       $result = Event::find($request->id);
       $result->delete();
       return $request->id;
@@ -54,7 +57,7 @@ class EventsController extends Controller
       $event  = Event::find($request->id);
         $end  = new DateTime($request->end_date);
         $end= $end->modify('+1 day' );
-         $event->update([
+        $event->update([
         "title"=>$request->title,
         "start"=>$request->startdate,
         "end"=> $end,

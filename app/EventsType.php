@@ -13,4 +13,7 @@ class EventsType extends Model
         'name',
         'color',
     ];
+    public function events(){
+        return $this->hasMany(Event::class,"action","id");
+    }
 }

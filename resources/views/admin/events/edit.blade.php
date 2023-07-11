@@ -57,11 +57,14 @@
 
                 </div>
             </form>
-            <a href="{{ route('admin.events.destroy', $event->id) }}">
+
+            <form method="GET" action="http://127.0.0.1:8000/admin/delete/event?id=88">
+                @csrf
                 <button class="btn btn-danger" type="submit">
                     Delete this event
                 </button>
-            </a>
+            </form>
+
         </div>
     </div>
 @endsection

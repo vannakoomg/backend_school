@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     use HasFactory;
-    public $table = 'events';
-     protected $fillable = [
+    protected $fillable = [
         'title',
         'start',
         'end',
         'action',
-        'action_color',
         'time',
         'create_owner'
     ];
+    public function eventType(){
+        return $this->belongsTo(EventsType::class,"action","id");
+    }
 }
