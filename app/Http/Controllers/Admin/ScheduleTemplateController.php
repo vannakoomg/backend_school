@@ -53,7 +53,7 @@ class ScheduleTemplateController extends Controller
 
     public function create(){
 
-        abort_if(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_ifpe(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $types = $this->getTypeValue();
 
         return view('admin.scheduletemplate.create', compact('types'));
@@ -68,15 +68,11 @@ class ScheduleTemplateController extends Controller
         return view('admin.scheduletemplate.edit', compact('scheduletemplate','types'));
 
     }
-
-
     public function update(ScheduleTemplate $scheduletemplate, Request $request){
-
        // abort_if(Gate::denies('lesson_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-       $data=[
+    $data=[
         'name'=>'required|unique:schedule_template,name,'.$scheduletemplate->id,
-       ];
+    ];
 
     $validation  = Validator::make($request->all(),$data);
 

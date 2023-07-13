@@ -889,6 +889,7 @@ class ComposerStaticInit9f214bec2257c161f2fef825eb03de6b
         'App\\Http\\Resources\\Admin\\RoleResource' => __DIR__ . '/../..' . '/app/Http/Resources/Admin/RoleResource.php',
         'App\\Http\\Resources\\Admin\\SchoolClassResource' => __DIR__ . '/../..' . '/app/Http/Resources/Admin/SchoolClassResource.php',
         'App\\Http\\Resources\\Admin\\UserResource' => __DIR__ . '/../..' . '/app/Http/Resources/Admin/UserResource.php',
+        'App\\Http\\Resources\\EventResource' => __DIR__ . '/../..' . '/app/Http/Resources/EventResource.php',
         'App\\Image' => __DIR__ . '/../..' . '/app/Image.php',
         'App\\Lesson' => __DIR__ . '/../..' . '/app/Lesson.php',
         'App\\Listeners\\FirebaseNotification' => __DIR__ . '/../..' . '/app/Listeners/FirebaseNotification.php',

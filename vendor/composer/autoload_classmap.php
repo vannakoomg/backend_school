@@ -124,6 +124,7 @@ return array(
     'App\\Http\\Resources\\Admin\\RoleResource' => $baseDir . '/app/Http/Resources/Admin/RoleResource.php',
     'App\\Http\\Resources\\Admin\\SchoolClassResource' => $baseDir . '/app/Http/Resources/Admin/SchoolClassResource.php',
     'App\\Http\\Resources\\Admin\\UserResource' => $baseDir . '/app/Http/Resources/Admin/UserResource.php',
+    'App\\Http\\Resources\\EventResource' => $baseDir . '/app/Http/Resources/EventResource.php',
     'App\\Image' => $baseDir . '/app/Image.php',
     'App\\Lesson' => $baseDir . '/app/Lesson.php',
     'App\\Listeners\\FirebaseNotification' => $baseDir . '/app/Listeners/FirebaseNotification.php',

@@ -295,27 +295,21 @@ class UsersController extends Controller
         }
 
         if ($files = $request->file('collect_imgupload1') && $request->guardian1) {
-           
             if(strtolower($user->guardian1)!='guardian-avatar.png')
                     Storage::delete(['photo/' . "{$user->id}_guardian1.png"]);
-               
                 $fileName =  "{$user->id}_guardian1.png";
                 $request->collect_imgupload1->storeAs('photo', $fileName);
                 // $user->update(['guardian1' => $fileName]);
                // $request->request->add(['guardian1' => $fileName]);
         }
-
         if ($files = $request->file('collect_imgupload2') && $request->guardian2) {
-            
             if(strtolower($user->guardian2)!='guardian-avatar.png')
                 Storage::delete(['photo/' . "{$user->id}_guardian2.png"]);
-               
                 $fileName =  "{$user->id}_guardian2.png";
                 $request->collect_imgupload2->storeAs('photo', $fileName);
                // $user->update(['guardian2' => $fileName]);
                // $request->request->add(['guardian2' => $fileName]);
         }
-
         if ($files = $request->file('collect_imgupload3') && $request->guardian3) {
 
             if(strtolower($user->guardian3)!='guardian-avatar.png')

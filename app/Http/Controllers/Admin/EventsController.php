@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Event;
 use DateTime;
+use Illuminate\Support\Facades\DB;
+
 use App\EventsType;
 use App\Http\Resources\EventResource;
 
@@ -16,14 +18,15 @@ class EventsController extends Controller
       return view('admin.events.index');
     }
     public function show(){
-      $eventsType = EventsType::all();
+      $eventsType =  EventsType::all();
       return view('admin.events.create', compact('eventsType'));
     }
     public function getEvent(){
-    $events =new EventResource(Event::all());
-      dd($events);
-      // dd($events);
-      return $events;
+      $data = DB::table('events')
+              ->select('events.id','title','start','end','time','color')
+              ->join('event_type','events.event_type_id','=','event_type.id')
+              ->get();
+      return $data;
     }
     public function store(Request $request){
         $end  = new DateTime($request->end_date);
@@ -34,17 +37,16 @@ class EventsController extends Controller
                 'start' => $request->startdate,
                 'end' => $endString,
                 'time' => $request->time,
-                'action' => $request->action,
+                'event_type_id' => $request->event_type_id,
                 'create_owner'=>auth()->user()->name
             );
         $value=  Event::create($data);
         return redirect('admin/events');      
     }
-    public function destroy(Request $request){
-      return $request;
-      $result = Event::find($request->id);
+    public function destroy($id){
+      $result = Event::find($id);
       $result->delete();
-      return $request->id;
+      return redirect('admin/events');      
     }
     public function edit(Request $request){
       $event= Event::find($request->id);
@@ -60,11 +62,11 @@ class EventsController extends Controller
         $event->update([
         "title"=>$request->title,
         "start"=>$request->startdate,
-        "end"=> $end,
-        "action"=>$request->action+1,
+        "end"=> $end, 
+        "event_type_id"=>$request->event_type_id+1,
         "time"=>$request->time,
       ]);  
-       return redirect('admin/events');  
+      return redirect('admin/events');  
     }    
 
     

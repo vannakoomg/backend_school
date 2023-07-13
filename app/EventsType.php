@@ -9,7 +9,7 @@ class EventsType extends Model
 {
     use HasFactory;
     public $table = 'event_type';
-      protected $fillable = [
+    protected $fillable = [
         'name',
         'color',
     ];

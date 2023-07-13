@@ -152,7 +152,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // evenet
     Route::get('events','EventsController@index')->name('events.index'); 
     Route::post('events','EventsController@store')->name('events.store');
-    Route::get('delete/event','EventsController@destroy')->name('events.destroy');
+    Route::get('event/destroy/{id}','EventsController@destroy')->name('events.destroy');
     Route::get('events/create','EventsController@show')->name('events.create');
     Route::get('getEvent','EventsController@getEvent')->name('events.getEvents');
     Route::get('events/{id}/edit','EventsController@edit')->name('events.edit');

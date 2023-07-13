@@ -34,10 +34,11 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label class="" for="template_id">Action</label>
-                            <select name='action' class="custom-select select2">
+                            <label class="" for="template_id">Evnet Type</label>
+                            <select name='event_type_id' class="custom-select select2">
                                 @foreach ($eventsType as $key => $Type)
-                                    <option value="{{ $key }}" {{ $key + 1 == $event->action ? 'selected' : '' }}>
+                                    <option value="{{ $key }}"
+                                        {{ $key + 1 == $event->event_type_id ? 'selected' : '' }}>
                                         {{ $Type->name }}</option>
                                 @endforeach
                             </select>
@@ -51,20 +52,14 @@
                         id="title" value="{{ $event->title }}" required>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-danger" type="submit">
-                        {{ trans('global.save') }}
+                    <button class="btn btn-success" type="submit">
+                        {{ trans('global.update') }}
                     </button>
-
+                    <a class="btn btn-danger" href="{{ route('admin.events.destroy', $event->id) }}">
+                        delete event
+                    </a>
                 </div>
             </form>
-
-            <form method="GET" action="http://127.0.0.1:8000/admin/delete/event?id=88">
-                @csrf
-                <button class="btn btn-danger" type="submit">
-                    Delete this event
-                </button>
-            </form>
-
         </div>
     </div>
 @endsection

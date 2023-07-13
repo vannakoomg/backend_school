@@ -12,7 +12,7 @@
                             Add Events
                         </a>
                         <a class="btn btn-success" href="<?php echo e(route('admin.eventsType.index'), false); ?>">
-                            Add Acction
+                            Event Type
                         </a>
                     </div>
                 </div>
@@ -26,7 +26,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js"></script>
-
     <script>
         $(document).ready(function() {
             var calendar = $('#calendar').fullCalendar({
@@ -44,23 +43,12 @@
                     } else {
                         event.allDay = false;
                     }
-                },
-                eventAfterRender: function(event, element, view) {
-                    var dataHoje = new Date();
-                    if (event.action == 1) {
-                        //event.color = "#FFB347"; //Em andamento
-                        element.css('background-color', '#FFB347');
-                    } else if (event.start < dataHoje && event.end < dataHoje) {
-                        //event.color = "#77DD77"; //Concluído OK
-                        element.css('background-color', '#77DD77');
-                    } else if (event.start > dataHoje && event.end > dataHoje) {
-                        //event.color = "#AEC6CF"; //Não iniciado
-                        element.css('background-color', '#AEC6CF');
-                    }
+                    $color = "#" + event.color;
+                    element.css('background-color', $color);
                 },
                 selectable: true,
                 selectHelper: true,
-                eventClick: function(event) {
+                eventClick: function(events) {
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -71,7 +59,7 @@
                             console.log("on Event have been Erro");
                             $('#calendar').fullCalendar('refetchEvents');
                             window.location.assign(
-                                "events/" + event.id +
+                                "events/" + events.id +
                                 "/edit");
                         },
                         error: function(data) {
@@ -84,6 +72,5 @@
         });
     </script>
 <?php $__env->stopSection(); ?>
-
 
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wrok_in_ics\web_backend\resources\views/admin/events/index.blade.php ENDPATH**/ ?>

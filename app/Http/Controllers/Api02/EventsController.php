@@ -23,7 +23,7 @@ class EventsController extends Controller
             for($i = $begin; $i < $end; $i->modify('+1 day' )){
             $time= $i->format('Y-m-d');
             $title =collect([]);
-            $color_code = EventsType::find($e->action);
+            $color_code = EventsType::find($e->event_type_id);
             $title->push([
                     "title"=>$e->title,
                     "action_color"=>"0XFF$color_code->color",
@@ -33,7 +33,7 @@ class EventsController extends Controller
             // check  anther event have the same date
             foreach ($allEvent as $key => $all){
             if( $allEvent[$key]["date"]==$time){
-                $color_code = EventsType::find($e->action);
+                $color_code = EventsType::find($e->event_type_id);
                 $allEvent[$key]['event']->push([
                 "title"=>$e->title,
                 "action_color"=>"0XFF$color_code->color",

@@ -12,11 +12,11 @@ class Event extends Model
         'title',
         'start',
         'end',
-        'action',
+        'event_type_id',
         'time',
         'create_owner'
     ];
     public function eventType(){
-        return $this->belongsTo(EventsType::class,"action","id");
+        return $this->belongsTo(EventsType::class,"event_type_id","id");
     }
 }
