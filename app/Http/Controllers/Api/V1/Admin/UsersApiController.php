@@ -9,11 +9,13 @@ use App\Http\Resources\Admin\UserResource;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
+use App\SchoolClass;
 //use Symfony\Component\HttpFoundation\Response;
 use Validator;
 use App\Firebasetoken;
 use Response;
 Use Auth;
+use Illuminate\Support\Facades\DB;
 // use Illuminate\Support\Facades\Auth;
 use Hash;
 
@@ -72,6 +74,7 @@ class UsersApiController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        return "Hello world";
 
         $user->update($request->all());
 
@@ -81,7 +84,36 @@ class UsersApiController extends Controller
             ->response()
             ->setStatusCode(Response::HTTP_ACCEPTED);
     }
+    public function updateStudent(Request $request){
+        $user = User::where('email',$request->email)->first();
+        $class = SchoolClass::where('name',$request->class_name)
+        ->where('campus',$request->campus)->first(); 
+        if(empty($class)){
+            return response()->json(['message'=>'No this class Name in our database',]);
+        }
+        if(empty($user)){
+            $user= User::create([
+            "name"=>$request->name,
+            "namekh"=>$request->namekh,
+            "phone"=>$request->phone,
+            "email"=>$request->email,
+            "password"=>$request->password,
+            "class_id"=>$class->id,
+            ]);
+            $message = "create done";
+        }else{
+            $user->update([
+            "name"=>$request->name,
+            "namekh"=>$request->namekh,
+            "phone"=>$request->phone,
+            "password"=>$request->password,
+            "class_id"=>$class->id,
+        ]);  
+         $message = "update done";
+        }
+        return response()->json(['message'=>$message,'data'=>$user]);
 
+    }
     public function destroy(User $user)
     {
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');

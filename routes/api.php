@@ -1,7 +1,7 @@
 <?php
 use App\Http\Controllers\Api02\EventsController;
 use App\Http\Controllers\Api02\GallaryController;
-
+use App\Http\Controllers\Api\V1\Admin\UsersApiController;
 Route::post('login', 'Api\V1\Admin\UsersApiController@login');
 
 Route::post('register', 'Api\V1\Admin\UsersApiController@register');
@@ -94,8 +94,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('school-classes', 'SchoolClassesApiController');
 
     Route::apiResource('school-classes', 'SchoolClassesApiController');
-
 });
 
 Route::get('/events', [EventsController::class, 'getEvent']);
 Route::get('/gallary', [GallaryController::class, 'getGallary']);
+Route::post('/student',[UsersApiController::class,'updateStudent']);

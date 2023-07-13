@@ -170,6 +170,7 @@ class UsersController extends Controller
 
     public function store(StoreUserRequest $request)
     {
+       
         $data=(array) $request->all();
 
         if(in_array(3,$request->input('roles', [])))
@@ -179,7 +180,7 @@ class UsersController extends Controller
             unset($data['course_id']);
         
         $user = User::create($data);
-
+        //  dd($user);
         if ( $request->hasFile('audio_voice') ) {
             // The file
             $music_file = $request->file('audio_voice');
@@ -267,7 +268,6 @@ class UsersController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {    
-
         if ($files = $request->file('imgupload')) {
            // dd($user->photo);
             if(strtolower($user->photo)!='student-avatar.png')
@@ -278,7 +278,6 @@ class UsersController extends Controller
 
                 $request->request->add(['photo' => $fileName]);
         }
-
 
         if ( $request->hasFile('audio_voice') ) {
             // The file
