@@ -210,6 +210,17 @@
                     </a>
                 </li>
             @endcan
+            @can('feedback')
+                <li class="nav-item">
+                    <a href="{{ route('admin.tracking.index') }}"
+                        class="nav-link {{ request()->is('admin/feedback/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-comment-dots nav-icon">
+
+                        </i>
+                        Tracking
+                    </a>
+                </li>
+            @endcan
             @can('notification')
                 <li class="nav-item">
                     <a href="{{ route('admin.message.index') }}"

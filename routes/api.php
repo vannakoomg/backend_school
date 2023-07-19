@@ -1,6 +1,9 @@
 <?php
 use App\Http\Controllers\Api02\EventsController;
 use App\Http\Controllers\Api02\GallaryController;
+use App\Http\Controllers\Api02\TrackingController;
+use App\Http\Controllers\Api\V1\Admin\AnnouncementApiController;
+
 use App\Http\Controllers\Api\V1\Admin\UsersApiController;
 Route::post('login', 'Api\V1\Admin\UsersApiController@login');
 
@@ -86,7 +89,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Users
     Route::apiResource('users', 'UsersApiController');
-
     // Lessons
     Route::apiResource('lessons', 'LessonsApiController');
 
@@ -99,3 +101,5 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 Route::get('/events', [EventsController::class, 'getEvent']);
 Route::get('/gallary', [GallaryController::class, 'getGallary']);
 Route::post('/student',[UsersApiController::class,'updateStudent']);
+Route::post('/tracking',[TrackingController::class,'create']);
+Route::post('/announcemen/create',[AnnouncementApiController::class,'createViewAnnouncement']);

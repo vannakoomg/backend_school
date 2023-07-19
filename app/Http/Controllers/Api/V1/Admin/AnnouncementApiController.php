@@ -49,6 +49,22 @@ class AnnouncementApiController extends Controller
 
         return response()->json(['status'=>true,'message'=>'Announcement List','data'=>$data], $this->successStatus);
     }
+    public function createViewAnnouncement(Request $request){
+        try {
+            $announcement = Announcement::find($request->id);
+            $announcement->view =  $announcement->view +1;
+            $announcement->save();
+            return response()->json([
+                "massage"=>"done",
+                "new data"=>$announcement
+
+            ]);
+        }catch(v){
+            return response()->json([
+                "massage"=>"you have been catch",
+            ]);
+        }
+    }
 
     public function getAnnouncementDetail(Request $request){
         

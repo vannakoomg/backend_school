@@ -12,7 +12,7 @@ class Announcement extends Model
 
     protected $table='announcement';
 
-    protected $appends = ['full_image','date','time'];
+    protected $appends = ['full_image','date','time',];
 
       protected $dates = [
         'created_at',
@@ -25,6 +25,7 @@ class Announcement extends Model
         'body',
         'thumbnail',
         'send',
+        'view',
         ];
 
     public function getTimeAttribute(){

@@ -224,6 +224,17 @@
                     </a>
                 </li>
             <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('feedback')): ?>
+                <li class="nav-item">
+                    <a href="<?php echo e(route('admin.tracking.index'), false); ?>"
+                        class="nav-link <?php echo e(request()->is('admin/feedback/*') ? 'active' : '', false); ?>">
+                        <i class="fa-fw fas fa-comment-dots nav-icon">
+
+                        </i>
+                        Tracking
+                    </a>
+                </li>
+            <?php endif; ?>
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('notification')): ?>
                 <li class="nav-item">
                     <a href="<?php echo e(route('admin.message.index'), false); ?>"

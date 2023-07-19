@@ -174,4 +174,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('gallary','GallaryController@store')->name('gallary.store');
     Route::post('gallary/{id}/update','GallaryController@update')->name('gallary.update');
     Route::get('gallary/init','GallaryController@initPhoto')->name('gallary.init');
-});
+    // tracking
+    Route::get('tracking','TrackingController@index')->name('tracking.index');
+    Route::post('trsdfacking','TrackingController@search')->name('search.index');
+
+}); 
