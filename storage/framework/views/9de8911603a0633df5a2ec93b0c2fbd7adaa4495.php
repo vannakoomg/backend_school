@@ -1,17 +1,17 @@
-@extends('layouts.admin')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <div class="card">
         <div class="card-header">
             Create
         </div>
         <div class="card-body">
-            <form method="POST" action={{ route('admin.gallary.store') }} enctype="multipart/form-data" class="dropzone"
+            <form method="POST" action=<?php echo e(route('admin.gallary.store'), false); ?> enctype="multipart/form-data" class="dropzone"
                 id="dropzone">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="form-group">
                     <label class="required" for="From Date">title</label>
-                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="title"
-                        id="title" value="{{ old('name', '') }}" required>
+                    <input class="form-control <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>" type="text" name="title"
+                        id="title" value="<?php echo e(old('name', ''), false); ?>" required>
                 </div>
                 <div class="form-group">
                     <label class="required" for="From Date">Description</label>
@@ -21,17 +21,18 @@
                 <div class="form-group">
                     <label class="" for="event_date">Event Date </label>
                     <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"
-                        value={{ date('Y-m-d') }}>
+                        value=<?php echo e(date('Y-m-d'), false); ?>>
                 </div>
             </form>
             <button class="btn btn-success mt-3  pl-4 pr-4" type="submit" id="uploadfiles">
-                {{ trans('global.save') }}
+                <?php echo e(trans('global.save'), false); ?>
+
             </button>
 
         </div>
     </div>
-@endsection
-@section('scripts')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
     <script type="text/javascript">
         Dropzone.autoDiscover = false;
         var myDropzone = new Dropzone(".dropzone", {
@@ -65,4 +66,6 @@
             });;
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wrok_in_ics\school_v4\resources\views/admin/gallary/create.blade.php ENDPATH**/ ?>

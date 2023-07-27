@@ -17,7 +17,7 @@ class GallaryController extends Controller
         return view('admin.gallary.create');
     }
     public function store(Request $request) { 
-        
+        // dd("DFDF");
         $data = array(
             "name"=>$request->title,
             "description"=>$request->description,
@@ -27,24 +27,23 @@ class GallaryController extends Controller
         $lastId=  Gallary::latest('id')->first(); 
         $data = $request->file('file');
         foreach ($data as $files) {
-        $filename = $files->getClientOriginalName();
-        $files = $files->move(public_path().'storage/image',$files->getClientOriginalName());
+        $filename = "image-".time().'.'.$files->getClientOriginalName();
+        $files->storeAs('image',$filename);
         GallaryDetile::create([
             'filename' => $filename,
             "gallary_id"=>$lastId->id,
         ]);
         }
         $gallary = Gallary::all();
-        return view('admin.gallary.index' , compact("gallary"));
-  
+                return  redirect('admin/gallary/create');    
     }
     public function edit(Request $request){
         $gallary = Gallary::find($request->id);
         return view('admin.gallary.edit', compact('gallary'));
     }
     public function initPhoto(Request $request){
-     $gallaryDetail = GallaryDetile::all()->where('gallary_id','=',$request->id);
-     return $gallaryDetail;
+        $gallaryDetail = GallaryDetile::all()->where('gallary_id','=',$request->id);
+        return $gallaryDetail;
     }
     public function update(Request $request ,$id){
         $gallary = Gallary::find($id);
@@ -54,10 +53,10 @@ class GallaryController extends Controller
         if(!empty($request->file('file'))){
         $data = $request->file('file');
         foreach ($data as $files) {
-        $filed = $files->move(public_path('/storage/image/'));
-        $files =$files->getClientOriginalName();
+        $filename = "image-".time().'.'.$files->getClientOriginalName();
+        $files->storeAs('image',$filename);
         GallaryDetile::create([
-            'filename' => $files,
+            'filename' => $filename,
             "gallary_id"=>"$id",
             ]);
         }
@@ -65,8 +64,17 @@ class GallaryController extends Controller
         $gallary = Gallary::all()->sortByDesc('event_date');;
         return view('admin.gallary.index' , compact("gallary"));
     }
-    public function destroy(Request $request ){
+    
+    public function destroyGallary(Request $request){
+        $gallary = Gallary::find($request->id);
+        $gallary->delete();
+        $gallaryDetail = GallaryDetile::all()->where("gallary_id","=",$request->id);
+        GallaryDetile::destroy($gallaryDetail);
+        return redirect('admin/gallary');    
+    }
+     public function destroy(Request $request ){
         $gallaryDetail = GallaryDetile::find($request->id);
         $gallaryDetail->delete();  
     }
+
 }

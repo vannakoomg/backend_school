@@ -167,13 +167,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('events/type/{id}/update','EventTypeController@update')->name('eventsType.update');
 
     // gallary
-    Route::post('gallary/destroy','GallaryController@destroy')->name('gallary.destroy');
     Route::get('gallary','GallaryController@index')->name('gallary.index');
     Route::get('gallary/create','GallaryController@create')->name('gallary.create');
     Route::get('gallary/{id}/edit','GallaryController@edit')->name('gallary.edit');
     Route::post('gallary','GallaryController@store')->name('gallary.store');
     Route::post('gallary/{id}/update','GallaryController@update')->name('gallary.update');
     Route::get('gallary/init','GallaryController@initPhoto')->name('gallary.init');
+    Route::post('gallary/destroy','GallaryController@destroy')->name('gallary.destroy');
+    Route::post('gallary/destroyGallary','GallaryController@destroyGallary')->name('gallary.destroyGallary');
+    
     // tracking
     Route::get('tracking','TrackingController@index')->name('tracking.index');
     Route::post('trsdfacking','TrackingController@search')->name('search.index');

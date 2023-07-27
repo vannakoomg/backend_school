@@ -1,5 +1,5 @@
-@extends('layouts.admin')
-@section('styles')
+
+<?php $__env->startSection('styles'); ?>
     <style>
         article {
             --img-scale: 1.001;
@@ -101,7 +101,7 @@
             gap: 24px;
         }
 
-        @media screen and (max-width: 960px) {
+        @media  screen and (max-width: 960px) {
             article {
                 container: card/inline-size;
             }
@@ -111,7 +111,7 @@
             }
         }
 
-        @container card (min-width: 380px) {
+        @container  card (min-width: 380px) {
             .article-wrapper {
                 display: grid;
                 grid-template-columns: 20px 1fr;
@@ -146,25 +146,26 @@
             width: 1px;
         }
     </style>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="card">
         <div class="card-header">
-            {{ trans('global.create') }}
+            <?php echo e(trans('global.create'), false); ?>
+
         </div>
         <div class="card-body bg-instagram">
-            @can('school_class_create')
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_class_create')): ?>
                 <div style="margin-bottom: 20px;" class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-success" href="{{ route('admin.gallary.create') }}">
+                        <a class="btn btn-success" href="<?php echo e(route('admin.gallary.create'), false); ?>">
                             Add Gallary
                         </a>
                     </div>
                 </div>
-            @endcan
-            @can('school_class_create')
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_class_create')): ?>
                 <div class="d-flex flex-wrap">
-                    @foreach ($gallary as $gallarysss)
+                    <?php $__currentLoopData = $gallary; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallarysss): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="w-25 pb-2">
                             <article class="mr-3 mb-1">
                                 <div class="article-wrapper mr-0">
@@ -172,9 +173,10 @@
                                         <img src="https://picsum.photos/id/1011/800/450" alt="" />
                                     </figure>
                                     <div class="article-body">
-                                        <h2> {{ $gallarysss->name }}</h2>
+                                        <h2> <?php echo e($gallarysss->name, false); ?></h2>
                                         <p>
-                                            {{ $gallarysss->description }}
+                                            <?php echo e($gallarysss->description, false); ?>
+
                                         </p>
 
                                     </div>
@@ -182,37 +184,24 @@
                                 </div>
                             </article>
 
-                            <form class=" w-25" method="POST" action="{{ route('admin.gallary.destroyGallary') }}"
-                                onsubmit="return confirm('{{ trans('global.areYouSure') }}');" enctype="multipart/form-data">
-                                @csrf
-                                <button class="btn btn-xs btn-danger" name="id" value={{ $gallarysss->id }}>Delete</button>
+                            <form class=" w-25" method="POST" action="<?php echo e(route('admin.gallary.destroyGallary'), false); ?>"
+                                onsubmit="return confirm('<?php echo e(trans('global.areYouSure'), false); ?>');" enctype="multipart/form-data">
+                                <?php echo csrf_field(); ?>
+                                <button class="btn btn-xs btn-danger" name="id" value=<?php echo e($gallarysss->id, false); ?>>Delete</button>
                                 <form>
                                     <a class="btn btn-xs btn-facebook"
-                                        href="{{ route('admin.gallary.edit', $gallarysss->id) }}">Edit</a>
+                                        href="<?php echo e(route('admin.gallary.edit', $gallarysss->id), false); ?>">Edit</a>
 
                         </div>
 
 
-                        {{-- </section> --}}
-                        {{-- <div class="card bg-gray-100 p-2 mr-4" style="width: 14rem;">
-                            <h5 class="card-title">{{ $gallarysss->name }}</h5>
-                            <h6 class="card-subtitle text-muted mb-3">{{ $gallarysss->description }}</h6>
-                            <div class="row">
-                                <a class="col-2 w-25 btn btn-xs btn-facebook ml-3"
-                                    href="{{ route('admin.gallary.edit', $gallarysss->id) }}">Edit</a>
-                                <form class="col-2 w-25" method="POST" action="{{ route('admin.gallary.destroyGallary') }}"
-                                    onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <button class=" w-25 btn btn-xs btn-danger" name="id"
-                                        value={{ $gallarysss->id }}>Delete</button>
-                                    <form>
-                            </div>
-
-                        </div> --}}
-                    @endforeach
+                        
+                        
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-            @endcan
+            <?php endif; ?>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wrok_in_ics\school_v4\resources\views/admin/gallary/index.blade.php ENDPATH**/ ?>

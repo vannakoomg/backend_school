@@ -13,4 +13,7 @@ class GallaryDetile extends Model
         'gallary_id',
         'filename',
     ];
+     public function getFullImageAttribute(){
+        return asset('storage/image/' .     $this->filename);
+    }
 }
