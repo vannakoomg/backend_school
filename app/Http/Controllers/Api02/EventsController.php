@@ -11,6 +11,7 @@ use App\Event;
 class EventsController extends Controller
 {
     public function getEvent(Request $request){
+        // return 8;
     $stop = new DateTime($request->start);
     $stop = $stop->modify('+ 30day' )->format('Y-m-d');
     $event =  Event::orderBy('start', 'ASC')->get();

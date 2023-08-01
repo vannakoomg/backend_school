@@ -25,9 +25,11 @@
 
         /* basic article elements styling */
         article h2 {
+            height: 60px;
             /* margin: 0 0 18px 0; */
             /* font-family: "Bebas Neue", cursive; */
             font-size: 1.9rem;
+            text-overflow: ellipsis;
             /* letter-spacing: 0.06em; */
             color: var(--title-color);
             transition: color 0.3s ease-out;
@@ -81,11 +83,6 @@
             box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
         }
 
-
-        /************************
-                                                                                                                                                                                                                                                        Generic layout (demo looks)
-                                                                                                                                                                                                                                                        **************************/
-
         *,
         *::before,
         *::after {
@@ -119,9 +116,7 @@
 
             }
 
-            .article-body {
-                padding-left: 0;
-            }
+
 
             figure {
                 width: 100%;
@@ -130,9 +125,9 @@
             }
 
             figure img {
-                height: 100%;
+                height: 120%;
                 aspect-ratio: 1;
-                object-fit: cover;
+                object-fit: contain;
             }
         }
 
@@ -163,54 +158,45 @@
                 </div>
             @endcan
             @can('school_class_create')
-                <div class="d-flex flex-wrap">
-                    @foreach ($gallary as $gallarysss)
-                        <div class="w-25 pb-2">
-                            <article class="mr-3 mb-1">
-                                <div class="article-wrapper mr-0">
-                                    <figure>
-                                        <img src="https://picsum.photos/id/1011/800/450" alt="" />
-                                    </figure>
-                                    <div class="article-body">
-                                        <h2> {{ $gallarysss->name }}</h2>
-                                        <p>
-                                            {{ $gallarysss->description }}
-                                        </p>
+                <div>
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        @foreach ($data as $value)
+                            <div>{{ $value['year_month'] }}</div>
+                            <div class="d-flex flex-wrap">
+
+                                @foreach ($value['gallary'] as $value02)
+                                    <div class="w-25 pb-2">
+                                        <article class="mr-3 mb-1">
+                                            <div class="article-wrapper mr-0">
+                                                <figure>
+                                                    <img src={{ $value02['image'] }} alt="" />
+                                                </figure>
+                                                <div class="article-body">
+                                                    <h2> {{ $value02['title'] }}</h2>
+                                                    <p>
+                                                        {{ $value02['description'] }}
+                                                    </p>
+
+                                                </div>
+
+                                            </div>
+                                        </article>
+                                        <form class=" w-25" method="POST" action="{{ route('admin.gallary.destroyGallary') }}"
+                                            onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <button class="btn btn-xs btn-danger" name="id"
+                                                value={{ $value02['id'] }}>Delete</button>
+                                            <form>
+                                                <a class="btn btn-xs btn-facebook"
+                                                    href="{{ route('admin.gallary.edit', $value02['id']) }}">Edit</a>
 
                                     </div>
-
-                                </div>
-                            </article>
-
-                            <form class=" w-25" method="POST" action="{{ route('admin.gallary.destroyGallary') }}"
-                                onsubmit="return confirm('{{ trans('global.areYouSure') }}');" enctype="multipart/form-data">
-                                @csrf
-                                <button class="btn btn-xs btn-danger" name="id" value={{ $gallarysss->id }}>Delete</button>
-                                <form>
-                                    <a class="btn btn-xs btn-facebook"
-                                        href="{{ route('admin.gallary.edit', $gallarysss->id) }}">Edit</a>
-
-                        </div>
-
-
-                        {{-- </section> --}}
-                        {{-- <div class="card bg-gray-100 p-2 mr-4" style="width: 14rem;">
-                            <h5 class="card-title">{{ $gallarysss->name }}</h5>
-                            <h6 class="card-subtitle text-muted mb-3">{{ $gallarysss->description }}</h6>
-                            <div class="row">
-                                <a class="col-2 w-25 btn btn-xs btn-facebook ml-3"
-                                    href="{{ route('admin.gallary.edit', $gallarysss->id) }}">Edit</a>
-                                <form class="col-2 w-25" method="POST" action="{{ route('admin.gallary.destroyGallary') }}"
-                                    onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <button class=" w-25 btn btn-xs btn-danger" name="id"
-                                        value={{ $gallarysss->id }}>Delete</button>
-                                    <form>
+                                @endforeach
                             </div>
+                        @endforeach
+                    </div>
 
-                        </div> --}}
-                    @endforeach
                 </div>
             @endcan
         </div>

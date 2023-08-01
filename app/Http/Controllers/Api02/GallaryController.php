@@ -12,6 +12,7 @@ class GallaryController extends Controller
 {
     public function getGallary(Request $request){
         $data = collect([]);
+        $data02 =collect([]);
         if(empty($request->id)){
         $gallary = Gallary::all()->sortByDesc('event_date');
         foreach($gallary as $key =>$gal){
@@ -21,7 +22,14 @@ class GallaryController extends Controller
             }else{
                 $image= asset('storage/image/' .  GallaryDetile::all()->where('gallary_id','=',$gal->id)->first()->filename);
             }
+            
             $time  = new DateTime($gal->event_date);
+             $data02->push([
+                    "id"=>$gal->id,
+                        "title"=>$gal->name,
+                        "image"=> $image,
+                        "date"=>$time->format('Y-m-d'),
+                ],);
             $galddd = collect([]);
             $galddd->push([
                     "id"=>$gal->id,
@@ -56,8 +64,9 @@ class GallaryController extends Controller
             }
         }
         }else{
-            $gallary = GallaryDetile::all()->where('gallary_id','=',$request->id);
-            foreach($gallary as $key =>$gal){
+            $gallaryDetile = GallaryDetile::all()->where('gallary_id','=',$request->id);
+            $gallary = Gallary::find($request->id);
+            foreach($gallaryDetile as $key =>$gal){
             $data->push([
                 "image"=>asset('storage/image/' . $gal->filename),
             ]);
@@ -65,9 +74,14 @@ class GallaryController extends Controller
             $data->push([
                 "image"=>"",
             ]);
+            return response()->json([
+                "data"=>$data,
+                "description"=>$gallary->description,
+            ]);
         }
         return response()->json([
-            "data"=>$data
+            "data"=>$data,
+            "data02"=>$data02
         ]);
     }
 }

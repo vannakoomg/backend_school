@@ -25,9 +25,11 @@
 
         /* basic article elements styling */
         article h2 {
+            height: 60px;
             /* margin: 0 0 18px 0; */
             /* font-family: "Bebas Neue", cursive; */
             font-size: 1.9rem;
+            text-overflow: ellipsis;
             /* letter-spacing: 0.06em; */
             color: var(--title-color);
             transition: color 0.3s ease-out;
@@ -81,11 +83,6 @@
             box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
         }
 
-
-        /************************
-                                                                                                                                                                                                                                                        Generic layout (demo looks)
-                                                                                                                                                                                                                                                        **************************/
-
         *,
         *::before,
         *::after {
@@ -119,9 +116,7 @@
 
             }
 
-            .article-body {
-                padding-left: 0;
-            }
+
 
             figure {
                 width: 100%;
@@ -130,9 +125,9 @@
             }
 
             figure img {
-                height: 100%;
+                height: 120%;
                 aspect-ratio: 1;
-                object-fit: cover;
+                object-fit: contain;
             }
         }
 
@@ -164,40 +159,46 @@
                 </div>
             <?php endif; ?>
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_class_create')): ?>
-                <div class="d-flex flex-wrap">
-                    <?php $__currentLoopData = $gallary; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallarysss): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="w-25 pb-2">
-                            <article class="mr-3 mb-1">
-                                <div class="article-wrapper mr-0">
-                                    <figure>
-                                        <img src="https://picsum.photos/id/1011/800/450" alt="" />
-                                    </figure>
-                                    <div class="article-body">
-                                        <h2> <?php echo e($gallarysss->name, false); ?></h2>
-                                        <p>
-                                            <?php echo e($gallarysss->description, false); ?>
+                <div>
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div><?php echo e($value['year_month'], false); ?></div>
+                            <div class="d-flex flex-wrap">
 
-                                        </p>
+                                <?php $__currentLoopData = $value['gallary']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value02): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="w-25 pb-2">
+                                        <article class="mr-3 mb-1">
+                                            <div class="article-wrapper mr-0">
+                                                <figure>
+                                                    <img src=<?php echo e($value02['image'], false); ?> alt="" />
+                                                </figure>
+                                                <div class="article-body">
+                                                    <h2> <?php echo e($value02['title'], false); ?></h2>
+                                                    <p>
+                                                        <?php echo e($value02['description'], false); ?>
+
+                                                    </p>
+
+                                                </div>
+
+                                            </div>
+                                        </article>
+                                        <form class=" w-25" method="POST" action="<?php echo e(route('admin.gallary.destroyGallary'), false); ?>"
+                                            onsubmit="return confirm('<?php echo e(trans('global.areYouSure'), false); ?>');"
+                                            enctype="multipart/form-data">
+                                            <?php echo csrf_field(); ?>
+                                            <button class="btn btn-xs btn-danger" name="id"
+                                                value=<?php echo e($value02['id'], false); ?>>Delete</button>
+                                            <form>
+                                                <a class="btn btn-xs btn-facebook"
+                                                    href="<?php echo e(route('admin.gallary.edit', $value02['id']), false); ?>">Edit</a>
 
                                     </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
 
-                                </div>
-                            </article>
-
-                            <form class=" w-25" method="POST" action="<?php echo e(route('admin.gallary.destroyGallary'), false); ?>"
-                                onsubmit="return confirm('<?php echo e(trans('global.areYouSure'), false); ?>');" enctype="multipart/form-data">
-                                <?php echo csrf_field(); ?>
-                                <button class="btn btn-xs btn-danger" name="id" value=<?php echo e($gallarysss->id, false); ?>>Delete</button>
-                                <form>
-                                    <a class="btn btn-xs btn-facebook"
-                                        href="<?php echo e(route('admin.gallary.edit', $gallarysss->id), false); ?>">Edit</a>
-
-                        </div>
-
-
-                        
-                        
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             <?php endif; ?>
         </div>

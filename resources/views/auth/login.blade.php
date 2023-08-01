@@ -5,16 +5,12 @@
             <div class="card mx-4">
                 <div class="card-body p-4 bg-primary">
                     <h1>{{ trans('panel.site_title') }}</h1>
-
                     <p class="text-white">{{ trans('global.login') }}</p>
-
                     @if (session('message'))
                         <div class="alert alert-info" role="alert">
                             {{ session('message') }}
                         </div>
                     @endif
-
-
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
