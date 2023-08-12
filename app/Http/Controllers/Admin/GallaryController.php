@@ -79,6 +79,9 @@ class GallaryController extends Controller
         $data = $request->file('file');
         foreach ($data as $files) {
         $filename = "image-".time().'.'.$files->getClientOriginalName();
+        //  $filename->resize(100, 100, function ($constraint) {
+        //     $constraint->aspectRatio();
+        // });
         $files->storeAs('image',$filename);
         GallaryDetile::create([
             'filename' => $filename,
