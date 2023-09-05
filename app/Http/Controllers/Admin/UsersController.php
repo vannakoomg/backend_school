@@ -268,6 +268,7 @@ class UsersController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {    
+        $request->merge(["is_checkout"=>(empty($request->is_checkout)?0:1)]);
         if ($files = $request->file('imgupload')) {
            // dd($user->photo);
             if(strtolower($user->photo)!='student-avatar.png')

@@ -42,8 +42,9 @@
             autoProcessQueue: false,
             uploadMultiple: true,
             parallelUploads: 10000, // Number of files process at a time (default 2)
-            maxFilesize: 10000, //maximum file size 2MB
+            maxFilesize: 4096, //maximum file size 2MB
             maxFiles: 100,
+            timeout: 50000,
             addRemoveLinks: "true",
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
             dictDefaultMessage: '<div class="dropzone_bx"><button type="button">Browse a file</button></div>',

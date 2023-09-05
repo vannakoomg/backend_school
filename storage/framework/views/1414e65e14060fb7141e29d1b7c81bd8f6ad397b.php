@@ -5,17 +5,13 @@
             <div class="card mx-4">
                 <div class="card-body p-4 bg-primary">
                     <h1><?php echo e(trans('panel.site_title'), false); ?></h1>
-
                     <p class="text-white"><?php echo e(trans('global.login'), false); ?></p>
-
                     <?php if(session('message')): ?>
                         <div class="alert alert-info" role="alert">
                             <?php echo e(session('message'), false); ?>
 
                         </div>
                     <?php endif; ?>
-
-
                     <form method="POST" action="<?php echo e(route('login'), false); ?>">
                         <?php echo csrf_field(); ?>
 
