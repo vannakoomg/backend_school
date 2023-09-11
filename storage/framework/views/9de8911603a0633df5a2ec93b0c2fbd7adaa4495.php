@@ -45,12 +45,12 @@
             maxFilesize: 4096, //maximum file size 2MB
             maxFiles: 100,
             timeout: 50000,
+            resizeQuality: 0.5,
             addRemoveLinks: "true",
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
             dictDefaultMessage: '<div class="dropzone_bx"><button type="button">Browse a file</button></div>',
             dictResponseError: 'Error uploading file!',
-            thumbnailWidth: "150",
-            thumbnailHeight: "150",
+
             createImageThumbnails: true,
             dictRemoveFile: "Remove",
         });

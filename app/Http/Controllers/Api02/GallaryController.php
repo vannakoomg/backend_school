@@ -22,9 +22,8 @@ class GallaryController extends Controller
             }else{
                 $image= asset('storage/image/' .  GallaryDetile::all()->where('gallary_id','=',$gal->id)->first()->filename);
             }
-            
             $time  = new DateTime($gal->event_date);
-             $data02->push([
+            $data02->push([
                     "id"=>$gal->id,
                         "title"=>$gal->name,
                         "image"=> $image,
@@ -64,18 +63,16 @@ class GallaryController extends Controller
             }
         }
         }else{
-            $gallaryDetile = GallaryDetile::all()->where('gallary_id','=',$request->id);
+            $gallaryDetile = GallaryDetile::where('gallary_id','=',$request->id)->paginate(10);
             $gallary = Gallary::find($request->id);
             foreach($gallaryDetile as $key =>$gal){
             $data->push([
                 "image"=>asset('storage/image/' . $gal->filename),
             ]);
             }
-            $data->push([
-                "image"=>"",
-            ]);
             return response()->json([
                 "data"=>$data,
+                "last_page"=>$gallaryDetile->lastPage(),
                 "description"=>$gallary->description,
             ]);
         }

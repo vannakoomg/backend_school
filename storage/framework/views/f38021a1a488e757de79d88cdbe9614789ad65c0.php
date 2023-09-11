@@ -18,28 +18,27 @@
                     <input type="text" class="form-control" name="description" id="description"
                         value="<?php echo e($gallary->description, false); ?>" />
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-success mt-4" type="submit" id="update-btn">
-                        <?php echo e(trans('global.save'), false); ?>
-
-                    </button>
-                </div>
             </form>
+            <button class="btn btn-success mt-4" type="submit" id="uploadfiles">
+                <?php echo e(trans('global.save'), false); ?>
 
+            </button>
         </div>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scripts'); ?>
     <script type="text/javascript">
-        Dropzone.autoDiscover = false;
         var myDropzone = new Dropzone(".dropzone", {
+            headers: {
+                'X-CSRFToken': $('meta[name="token"]').attr('content')
+            },
             autoProcessQueue: false,
             uploadMultiple: true,
             addRemoveLinks: true,
-
-            parallelUploads: 100, // Number of files process at a time (default 2)
+            parallelUploads: 10000,
             maxFilesize: 100, //maximum file size 2MB
             maxFiles: 100,
+            timeout: 50000,
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
             dictDefaultMessage: '<div class="dropzone_bx"><button type="button">Browse a file</button></div>',
             dictResponseError: 'Error uploading file!',
@@ -48,7 +47,6 @@
             dictRemoveFile: "Remove",
             init: function() { // start of getting existing imahes
                 myDropzone = this;
-
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -62,7 +60,7 @@
                     dataType: "json",
 
                     success: function(response) { // get result
-                        console.log(response);
+
                         $.each(response, function(key, value) {
                             var mockFile = {
                                 name: value.filename,
@@ -109,10 +107,11 @@
                     fileRef.parentNode.removeChild(file.previewElement) : void 0;
             },
         });
+        Dropzone.autoDiscover = false;
         myDropzone.on("success", function(file, response) {
             console.log(response);
         });
-        $('#update-btn').click(function(e) {
+        $('#uploadfiles').click(function() {
             myDropzone.processQueue();
         });
     </script>
