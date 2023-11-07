@@ -62,7 +62,6 @@ class HomeworkApiController extends Controller
 
         return response()->json(['status'=>false,'message'=>'Invalid','data'=>[]], 401);
     }
-
     public function student_add_attachment(Request $request){
         if($request->file('file')){    
             //$homework = Homework::find($request->hwid); 

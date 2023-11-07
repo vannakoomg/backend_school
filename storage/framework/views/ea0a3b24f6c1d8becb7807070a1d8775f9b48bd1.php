@@ -7,7 +7,7 @@
                 <div style="margin-bottom: 10px;" class="row">
                     <div class="col-lg-12">
                         <a class="btn btn-success" href=<?php echo e(route('admin.eventsType.create'), false); ?>>
-                            <?php echo e(trans('global.add'), false); ?> Events
+                            <?php echo e(trans('global.add'), false); ?> Events Type
                         </a>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\User;
+use App\RoleUser;
 use Gate;
 use Illuminate\Http\Request;
 use App\SchoolClass;
@@ -57,14 +58,12 @@ class UsersApiController extends Controller
     {
 	$user =  auth()->user();
 
-        $user->update(['version' => $request->version]);
-  
+    // $user->update(['version' => "sdjfkasjfdkja"]);
+    $user->version =$request->version;
+    $user->save();
 	return response()->json(['status'=>'success'], $this->successStatus);
-
-
-    }
-
-
+    } 
+    
     public function show(User $user)
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -176,6 +175,7 @@ class UsersApiController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
+        $roleUser = RoleUser::create(["user_id"=>$user->id,"role_id"=>"4"]);
         $success['token'] =  $user->createToken('MyApp')->access_token;
         $success['name'] =  $user->name;
         return response()->json(['success'=>$success], $this->successStatus);

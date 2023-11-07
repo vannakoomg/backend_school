@@ -246,27 +246,25 @@
                     </a>
                 </li>
             <?php endif; ?>
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('lesson_access')): ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('events')): ?>
                 <li class="nav-item">
                     <a href=<?php echo e(route('admin.events.index'), false); ?>
 
                         class="nav-link <?php echo e(request()->is('admin/timetable') || request()->is('admin/timetable/*') ? 'active' : '', false); ?>">
                         <i class="fa-fw fas fa-clock nav-icon">
                         </i>
-                        <?php echo e(trans('events'), false); ?>
-
+                        Events
                     </a>
                 </li>
             <?php endif; ?>
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('lesson_access')): ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('gallary')): ?>
                 <li class="nav-item">
                     <a href=<?php echo e(route('admin.gallary.index'), false); ?>
 
                         class="nav-link <?php echo e(request()->is('admin/timetable') || request()->is('admin/timetable/*') ? 'active' : '', false); ?>">
                         <i class="fa-fw fas fa-clock nav-icon">
                         </i>
-                        <?php echo e(trans('gallary'), false); ?>
-
+                        Gallary
                     </a>
                 </li>
             <?php endif; ?>

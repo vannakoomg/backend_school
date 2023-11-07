@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Http\Request;
-
+use GuzzleHttp\Client;
 Route::redirect('/', '/login');
 
     Route::get('/service-worker.js', function () {
@@ -60,6 +60,7 @@ Route::middleware('auth')->get('/pusher/beams-auth', function (Request $request)
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     // Permissions
+    Route::get('/home/show/{campus}','HomeController@show')->name('home.show');
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
 
@@ -181,3 +182,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('trsdfacking','TrackingController@search')->name('search.index');
 
 }); 
+    

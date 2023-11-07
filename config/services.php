@@ -36,5 +36,8 @@ return [
         'beams_secret_key' => 'E1581BA1EAEBCED979ACD8902BC98170DE3536E1584360DA0FD883433A254BEF',
         'interest' => 'development',
      ],
+    'telegram-bot-api' => [
+    'token' => env('TELEGRAM_BOT_TOKEN', 'YOUR BOT TOKEN HERE')
+    ],
 
 ];

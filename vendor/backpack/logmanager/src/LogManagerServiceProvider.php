@@ -4,7 +4,6 @@ namespace Backpack\LogManager;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Route;
 
 class LogManagerServiceProvider extends ServiceProvider
 {

@@ -15,7 +15,6 @@ Route::get('calling-addnew/{rfidcard}', 'Api\V1\Admin\CallingApiController@addne
 
 Route::get('getsetting/{setting}', 'Api\V1\Admin\SettingApiController@getSetting');
 
-
 Route::post('preorder_notify','Api\V1\Admin\CanteenApiController@preorder_notify');
 Route::post('topup_notify','Api\V1\Admin\CanteenApiController@topup_notify');
     
@@ -50,7 +49,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::get('markasread','Api\V1\Admin\NotificationApiController@markAsRead');
 
-    Route::post('addfeedback','Api\V1\Admin\FeedbackApiController@addFeedback');
     Route::get('getfeedback','Api\V1\Admin\FeedbackApiController@getFeedbacks');
     Route::get('getfeedbackdetail','Api\V1\Admin\FeedbackApiController@getFeedbacksDetail');
     
@@ -103,3 +101,4 @@ Route::get('/gallary', [GallaryController::class, 'getGallary']);
 Route::post('/student',[UsersApiController::class,'updateStudent']);
 Route::post('/tracking',[TrackingController::class,'create']);
 Route::post('/announcemen/create',[AnnouncementApiController::class,'createViewAnnouncement']);
+    Route::post('addfeedback','Api\V1\Admin\FeedbackApiController@addFeedback');

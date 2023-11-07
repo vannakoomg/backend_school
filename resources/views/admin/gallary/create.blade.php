@@ -40,10 +40,10 @@
             },
             autoProcessQueue: false,
             uploadMultiple: true,
-            parallelUploads: 10000, // Number of files process at a time (default 2)
+            parallelUploads: 100, // Number of files process at a time (default 2)
             maxFilesize: 4096, //maximum file size 2MB
             maxFiles: 100,
-            timeout: 50000,
+            timeout: 180000,
             resizeQuality: 0.5,
             addRemoveLinks: "true",
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",

@@ -231,23 +231,23 @@
                     </a>
                 </li>
             @endcan
-            @can('lesson_access')
+            @can('events')
                 <li class="nav-item">
                     <a href={{ route('admin.events.index') }}
                         class="nav-link {{ request()->is('admin/timetable') || request()->is('admin/timetable/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-clock nav-icon">
                         </i>
-                        {{ trans('events') }}
+                        Events
                     </a>
                 </li>
             @endcan
-            @can('lesson_access')
+            @can('gallary')
                 <li class="nav-item">
                     <a href={{ route('admin.gallary.index') }}
                         class="nav-link {{ request()->is('admin/timetable') || request()->is('admin/timetable/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-clock nav-icon">
                         </i>
-                        {{ trans('gallary') }}
+                        Gallary
                     </a>
                 </li>
             @endcan

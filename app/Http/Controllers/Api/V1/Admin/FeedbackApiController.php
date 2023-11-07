@@ -11,27 +11,30 @@ use Illuminate\Support\Facades\Storage;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+// use Illuminate\Support\Facades\Htp.entp;
+use App\User;
 class FeedbackApiController extends Controller
 {
     public $successStatus = 200;
 
     public function addFeedback(Request $request){
-
+        $botToken ="6650556480:AAGW4hsUlJOAg7Q-Xjw2lxezaJkoxW5xB5Y";
+        $feedbackId = Feedback::all()->last()->id; 
+        $chatId = "-4084728733";
+        $urlFeedback = 'http://school.ics.edu.kh/admin/feedback/'.$feedbackId;
+        $telegram = Http::post('https://api.telegram.org/bot'.$botToken.'/sendmessage?chat_id='.$chatId.'&text='.$request->question.'
+'.$urlFeedback);
         if($request->file('file')){
-        
-         $validated=Validator::make($request->all(),[
+        $validated=Validator::make($request->all(),[
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category' => 'required',
             'question' => 'required',
-            
-         ]);
-       
-        }else{
+        ]);
+        }else{  
             $validated=Validator::make($request->all(),[
                 'category' => 'required',
                 'question' => 'required',
-             ]);
+            ]);
         }
 
         if($validated->fails()){
@@ -41,7 +44,7 @@ class FeedbackApiController extends Controller
         if ($files = $request->file('file')) {
             $fileName =  "feedback-".time().'.'.$request->file->getClientOriginalExtension();
             $request->file->storeAs('image', $fileName);
-
+            
         }
 
         $category = $request->category;
@@ -55,8 +58,7 @@ class FeedbackApiController extends Controller
         );
 
         $feedback = Feedback::create($data);
-    
-
+       
         return response()->json(['status'=>true,'message'=>'Feedback message has been send to School Admin.','data'=>[]], $this->successStatus);
 
     }
@@ -64,7 +66,6 @@ class FeedbackApiController extends Controller
     public function getFeedbacks(Request $request){
 
         $data=Feedback::where('student_id',Auth::user()->id)->orderBy('created_at','desc')->paginate(10);
-
         return response()->json(['status'=>true,'message'=>'Feedback List','data'=>$data], $this->successStatus);
 
     }
