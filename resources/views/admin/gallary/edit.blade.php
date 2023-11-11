@@ -19,27 +19,24 @@
                         value="{{ $gallary->description }}" />
                 </div>
             </form>
-            <button class="btn btn-success mt-4" type="submit" id="uploadfiles">
-                {{ trans('global.save') }}
-            </button>
+            <div class="form-group"><button class="btn btn-success mt-4" type="submit" id="update-btn">
+                    {{ trans('global.save') }}
+                </button></div>
         </div>
     </div>
 @endsection
 @section('scripts')
     <script type="text/javascript">
+        Dropzone.autoDiscover = false;
         var myDropzone = new Dropzone(".dropzone", {
-            headers: {
-                'X-CSRFToken': $('meta[name="token"]').attr('content')
-            },
             autoProcessQueue: false,
             uploadMultiple: true,
             addRemoveLinks: true,
-            parallelUploads: 10000,
+            parallelUploads: 100, // Number of files process at a time (default 2)
             maxFilesize: 100, //maximum file size 2MB
             maxFiles: 100,
-            timeout: 50000,
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<div class="dropzone_bx"><button type="button">Browse a file</button></div>',
+            dictDefaultMessage: '<button class="btn btn-info mt-4 " >  Browse File  </button>',
             dictResponseError: 'Error uploading file!',
             parallelChunkUploads: true,
             createImageThumbnails: true,
@@ -57,26 +54,28 @@
                         _token: $('meta[name="csrf-token"]').attr("content")
                     },
                     dataType: "json",
-
                     success: function(response) { // get result
-
+                        console.log(response);
                         $.each(response, function(key, value) {
                             var mockFile = {
-                                name: value.filename,
+                                name: "http://school.ics.edu.kh/storage/image/" +
+                                    value.filename,
                                 size: value.size,
                                 id: value.id
                             };
                             myDropzone.options.addedfile.call(
                                 myDropzone,
-                                mockFile
+                                mockFile,
+                                // name: $file,
                             );
                             myDropzone.options.thumbnail.call(
                                 myDropzone,
                                 mockFile,
-                                "storage/products/" + value.name
+                                "http://school.ics.edu.kh/storage/image/" +
+                                value.filename,
                             );
-                            $("[data-dz-thumbnail]").css("height", "120");
-                            $("[data-dz-thumbnail]").css("width", "120");
+                            $("[thumbnail]").css("height", "240");
+                            $("[data-dz-thumbnail]").css("width", "240");
                             $("[data-dz-thumbnail]").css("object-fit", "cover");
                         });
 
@@ -106,11 +105,11 @@
                     fileRef.parentNode.removeChild(file.previewElement) : void 0;
             },
         });
-        Dropzone.autoDiscover = false;
         myDropzone.on("success", function(file, response) {
-            console.log(response);
+            window.location.href = "{{ URL::to('admin/gallary') }}"
         });
-        $('#uploadfiles').click(function() {
+        $('#update-btn').click(function(e) {
+            console.log("errro ");
             myDropzone.processQueue();
         });
     </script>

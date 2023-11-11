@@ -163,7 +163,6 @@
                         @foreach ($data as $value)
                             <div>{{ $value['year_month'] }}</div>
                             <div class="d-flex flex-wrap">
-
                                 @foreach ($value['gallary'] as $value02)
                                     <div class="w-25 pb-2">
                                         <article class="mr-3 mb-1">
@@ -176,12 +175,10 @@
                                                     <p>
                                                         {{ $value02['description'] }}
                                                     </p>
-
                                                 </div>
-
                                             </div>
                                         </article>
-                                        <form class=" w-25" method="POST" action="{{ route('admin.gallary.destroyGallary') }}"
+                                        <form class="w-75" method="POST" action="{{ route('admin.gallary.destroyGallary') }}"
                                             onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                             enctype="multipart/form-data">
                                             @csrf

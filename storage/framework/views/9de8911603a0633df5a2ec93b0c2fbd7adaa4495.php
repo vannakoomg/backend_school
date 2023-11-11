@@ -28,7 +28,6 @@
                 <?php echo e(trans('global.save'), false); ?>
 
             </button>
-
         </div>
     </div>
 <?php $__env->stopSection(); ?>
@@ -48,15 +47,14 @@
             resizeQuality: 0.5,
             addRemoveLinks: "true",
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<div class="dropzone_bx"><button type="button">Browse a file</button></div>',
+            dictDefaultMessage: '<button class="btn btn-info mt-4 " >  Browse File  </button>',
             dictResponseError: 'Error uploading file!',
-
             createImageThumbnails: true,
             dictRemoveFile: "Remove",
         });
         Dropzone.autoDiscover = false;
         myDropzone.on("success", function(file, response) {
-            console.log(response);
+            window.location.href = "<?php echo e(URL::to('admin/gallary'), false); ?>"
         });
         $('#uploadfiles').click(function() {
             myDropzone.processQueue();

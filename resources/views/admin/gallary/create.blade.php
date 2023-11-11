@@ -27,7 +27,6 @@
             <button class="btn btn-success mt-3  pl-4 pr-4" type="submit" id="uploadfiles">
                 {{ trans('global.save') }}
             </button>
-
         </div>
     </div>
 @endsection
@@ -47,15 +46,14 @@
             resizeQuality: 0.5,
             addRemoveLinks: "true",
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<div class="dropzone_bx"><button type="button">Browse a file</button></div>',
+            dictDefaultMessage: '<button class="btn btn-info mt-4 " >  Browse File  </button>',
             dictResponseError: 'Error uploading file!',
-
             createImageThumbnails: true,
             dictRemoveFile: "Remove",
         });
         Dropzone.autoDiscover = false;
         myDropzone.on("success", function(file, response) {
-            console.log(response);
+            window.location.href = "{{ URL::to('admin/gallary') }}"
         });
         $('#uploadfiles').click(function() {
             myDropzone.processQueue();

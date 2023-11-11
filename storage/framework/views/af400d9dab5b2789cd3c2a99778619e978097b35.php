@@ -164,7 +164,6 @@
                         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div><?php echo e($value['year_month'], false); ?></div>
                             <div class="d-flex flex-wrap">
-
                                 <?php $__currentLoopData = $value['gallary']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value02): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="w-25 pb-2">
                                         <article class="mr-3 mb-1">
@@ -178,12 +177,10 @@
                                                         <?php echo e($value02['description'], false); ?>
 
                                                     </p>
-
                                                 </div>
-
                                             </div>
                                         </article>
-                                        <form class=" w-25" method="POST" action="<?php echo e(route('admin.gallary.destroyGallary'), false); ?>"
+                                        <form class="w-75" method="POST" action="<?php echo e(route('admin.gallary.destroyGallary'), false); ?>"
                                             onsubmit="return confirm('<?php echo e(trans('global.areYouSure'), false); ?>');"
                                             enctype="multipart/form-data">
                                             <?php echo csrf_field(); ?>
