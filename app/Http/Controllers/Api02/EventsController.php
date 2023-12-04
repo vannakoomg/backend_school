@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Api02;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DateTime;
+use Carbon\Carbon;
 use App\EventsType;
-
 use App\Event;
 class EventsController extends Controller
 {
     public function getEvent(Request $request){
     $stop = new DateTime($request->start);
-    $stop = $stop->modify('+ 30day' )->format('Y-m-d');
+    $lastDayOfMonth = Carbon::parse($stop)->endOfMonth()->modify('+ 1day');
     $event =  Event::orderBy('start', 'ASC')->get();
-    $event= $event->where('start','>=',$request->start)->where('end','<=',$stop);
-    $allEvent =collect([]); 
+    $event= $event->where('start','>=',$request->start)->where('end','<=',$lastDayOfMonth);
+    $allEvent =collect([]);
         foreach ($event as $key => $e){
             $begin = new DateTime($e->start);
             $end   = new DateTime($e->end );
@@ -47,7 +47,8 @@ class EventsController extends Controller
                 $allEvent ->push([
             "date"=> $time,
             "event"=>$title
-        ]);}}
+            ]);
+        } }
         }
     return response()->json([
                 "data"=>$allEvent

@@ -12,15 +12,17 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label class="" for="from_date"> Start Date </label>
-                            <input id="startdate" name="startdate" type="text" class="form-control datetimepicker"
-                                value="">
+                            <input id="startdate" name="startdate" type="text"
+                                class="form-control datetimepicker {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                value="{{ old('name', '') }}" required>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label class="" for="to_date">End Date </label>
-                            <input id="id" name="end_date" type="text" class="form-control datetimepicker"
-                                value="">
+                            <input id="id" name="end_date" type="text"
+                                class="form-control datetimepicker {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                value="{{ old('name', '') }}" required>
                         </div>
                     </div>
                 </div>
@@ -46,8 +48,8 @@
                 </div>
                 <div class="form-group">
                     <label class="required" for="From Date">title</label>
-                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="title"
-                        id="title" value="{{ old('name', '') }}" required>
+                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text"
+                        name="title" id="title" value="{{ old('name', '') }}" required>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
