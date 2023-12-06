@@ -13,15 +13,17 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label class="" for="from_date"> Start Date </label>
-                            <input id="startdate" name="startdate" type="text" class="form-control datetimepicker"
-                                value="<?php echo e($event->start, false); ?>">
+                            <input id="startdate" name="startdate" type="text"
+                                class="form-control datetimepicker <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>"
+                                value="<?php echo e($event->start, false); ?>" required>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label class="" for="to_date">End Date </label>
-                            <input id="id" name="end_date" type="text" class="form-control datetimepicker"
-                                value="<?php echo e($endddd, false); ?>">
+                            <input id="id" name="end_date" type="text"
+                                class="form-control datetimepicker <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>"
+                                value="<?php echo e($endddd, false); ?>" required>
                         </div>
                     </div>
                 </div>
@@ -49,8 +51,8 @@
                 </div>
                 <div class="form-group">
                     <label class="required" for="From Date">title</label>
-                    <input class="form-control <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>" type="text" name="title"
-                        id="title" value="<?php echo e($event->title, false); ?>" required>
+                    <input class="form-control <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>" type="text"
+                        name="title" id="title" value="<?php echo e($event->title, false); ?>" required>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success" type="submit">

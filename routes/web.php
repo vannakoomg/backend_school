@@ -180,6 +180,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // tracking
     Route::get('tracking','TrackingController@index')->name('tracking.index');
     Route::post('trsdfacking','TrackingController@search')->name('search.index');
+    
+    // canteen
+    Route::get('canteen','CanteenController@index')->name('canteen.index');
+    Route::get('canteen/create','CanteenController@create')->name('canteen.create');
+    Route::post('canteen','CanteenController@store')->name('canteen.store');
+    Route::get('canteen/{id}/edit','CanteenController@edit')->name('canteen.edit');
+    Route::post('canteen/{id}/update','CanteenController@update')->name('canteen.update');
+    Route::get('canteen/init','CanteenController@initPhoto')->name('canteen.init');
+    Route::post('canteen/destroy','CanteenController@destroy')->name('canteen.destroy');
+    Route::post('canteen/destroyMenu/{id}','CanteenController@destroyMenu')->name('canteen.destroyMenu');
 
+    
 }); 
     

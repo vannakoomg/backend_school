@@ -8,18 +8,18 @@
             <form method="POST" action={{ route('admin.gallary.store') }} enctype="multipart/form-data" class="dropzone"
                 id="dropzone">
                 @csrf
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label class="required" for="From Date">title</label>
                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="title"
                         id="title" value="{{ old('name', '') }}" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label class="required" for="From Date">Description</label>
                     <input type="text" class="form-control" name="description" id="description" value=""
                         required />
                 </div>
-                <div class="form-group">
-                    <label class="" for="event_date">Event Date </label>
+                <div class="form-group mb-4">
+                    <label class="required" for="event_date">Event Date </label>
                     <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"
                         value={{ date('Y-m-d') }}>
                 </div>
@@ -56,7 +56,12 @@
             window.location.href = "{{ URL::to('admin/gallary') }}"
         });
         $('#uploadfiles').click(function() {
-            myDropzone.processQueue();
+
+            if (myDropzone.files.length > 0) {
+                myDropzone.processQueue();
+            } else {
+                $('#dropzone').submit();
+            }
         });
         $(function() {
             $('.datetimepicker').datetimepicker({

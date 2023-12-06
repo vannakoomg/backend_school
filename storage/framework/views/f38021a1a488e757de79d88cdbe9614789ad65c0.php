@@ -9,17 +9,22 @@
             <form method="POST" action=<?php echo e(route('admin.gallary.update', $gallary->id), false); ?> enctype="multipart/form-data"
                 class="dropzone" id="dropzone">
                 <?php echo csrf_field(); ?>
-                <div class="form-group">
-                    <label class="requires" for="title">Title</label>
+                <div class="form-group mb-4">
+                    <label class="required" for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" value="<?php echo e($gallary->name, false); ?>" />
                 </div>
-                <div class="form-group">
-                    <label class="" for="description">Description</label>
+                <div class="form-group mb-4">
+                    <label class="required " for="description">Description</label>
                     <input type="text" class="form-control" name="description" id="description"
                         value="<?php echo e($gallary->description, false); ?>" />
                 </div>
+                <div class="form-group mb-4">
+                    <label class="required" for="event_date">Event Date </label>
+                    <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"
+                        value=<?php echo e($gallary->event_date, false); ?>>
+                </div>
             </form>
-            <div class="form-group"><button class="btn btn-success mt-4" type="submit" id="update-btn">
+            <div class="form-group mb-4"><button class="btn btn-success mt-4" type="submit" id="update-btn">
                     <?php echo e(trans('global.save'), false); ?>
 
                 </button></div>
@@ -110,8 +115,11 @@
             window.location.href = "<?php echo e(URL::to('admin/gallary'), false); ?>"
         });
         $('#update-btn').click(function(e) {
-            console.log("errro ");
-            myDropzone.processQueue();
+            if (myDropzone.files.length > 0) {
+                myDropzone.processQueue();
+            } else {
+                $('#dropzone').submit();
+            }
         });
     </script>
 <?php $__env->stopSection(); ?>

@@ -30,6 +30,7 @@
         "laravel/ui": "^3.0",
         "mpdf/mpdf": "^8.0",
         "mpyw/eloquent-has-by-non-dependent-subquery": "^2.0",
+        "nesbot/carbon": "^2.72",
         "niklasravnsborg/laravel-pdf": "^4.1",
         "nunomaduro/laravel-desktop-notifier": "^2.5",
         "pusher/pusher-push-notifications": "^1.1",

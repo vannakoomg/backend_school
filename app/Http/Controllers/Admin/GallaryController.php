@@ -69,6 +69,16 @@ class GallaryController extends Controller
         return view('admin.gallary.create');
     }
     public function store(Request $request) { 
+        $messages = [
+        'file.*' => 'The Image field is required.',
+        ];
+        request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'event_date' => 'required',
+            'file' => 'required',
+            
+        ],$messages);
         $data = array(
             "name"=>$request->title,
             "description"=>$request->description,
@@ -81,7 +91,6 @@ class GallaryController extends Controller
         $filename = "image-".time().'.'.$files->getClientOriginalName();
         $image = \Image::make(file_get_contents($files));
         $image->save(\storage_path('app/public/image/'.$filename),"15");
-        // $files->storeAs('image',$filename);
         GallaryDetile::create([
             'filename' => $filename,
             "gallary_id"=>$lastId->id,
@@ -99,9 +108,20 @@ class GallaryController extends Controller
         return $gallaryDetail;
     }
     public function update(Request $request ,$id){
+        $messages = [
+        'file.*' => 'The Image field is required.',
+        ];
+        request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'event_date' => 'required',
+            // 'file' => 'required',
+            
+        ],$messages);
         $gallary = Gallary::find($id);
         $gallary->name = $request->title;
         $gallary->description=$request->description;
+        $gallary->event_date =$request->event_date;
         $gallary->save();
         if(!empty($request->file('file'))){
         $data = $request->file('file');
@@ -111,12 +131,9 @@ class GallaryController extends Controller
         GallaryDetile::create([
             'filename' => $filename,
             "gallary_id"=>"$id",
-            ]);
+            ]);}
         }
-        }
-        return redirect('admin/gallary');   
-        // $gallary = Gallary::all()->sortByDesc('event_date');;
-        // return view('admin.gallary.index' , compact("gallary"));
+        return redirect('admin/gallary');
     }
     
     public function destroyGallary(Request $request){

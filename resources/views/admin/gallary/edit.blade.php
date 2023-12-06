@@ -9,17 +9,22 @@
             <form method="POST" action={{ route('admin.gallary.update', $gallary->id) }} enctype="multipart/form-data"
                 class="dropzone" id="dropzone">
                 @csrf
-                <div class="form-group">
-                    <label class="requires" for="title">Title</label>
+                <div class="form-group mb-4">
+                    <label class="required" for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" value="{{ $gallary->name }}" />
                 </div>
-                <div class="form-group">
-                    <label class="" for="description">Description</label>
+                <div class="form-group mb-4">
+                    <label class="required " for="description">Description</label>
                     <input type="text" class="form-control" name="description" id="description"
                         value="{{ $gallary->description }}" />
                 </div>
+                <div class="form-group mb-4">
+                    <label class="required" for="event_date">Event Date </label>
+                    <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"
+                        value={{ $gallary->event_date }}>
+                </div>
             </form>
-            <div class="form-group"><button class="btn btn-success mt-4" type="submit" id="update-btn">
+            <div class="form-group mb-4"><button class="btn btn-success mt-4" type="submit" id="update-btn">
                     {{ trans('global.save') }}
                 </button></div>
         </div>
@@ -109,8 +114,11 @@
             window.location.href = "{{ URL::to('admin/gallary') }}"
         });
         $('#update-btn').click(function(e) {
-            console.log("errro ");
-            myDropzone.processQueue();
+            if (myDropzone.files.length > 0) {
+                myDropzone.processQueue();
+            } else {
+                $('#dropzone').submit();
+            }
         });
     </script>
 @endsection

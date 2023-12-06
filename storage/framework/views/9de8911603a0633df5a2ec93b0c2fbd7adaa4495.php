@@ -8,18 +8,18 @@
             <form method="POST" action=<?php echo e(route('admin.gallary.store'), false); ?> enctype="multipart/form-data" class="dropzone"
                 id="dropzone">
                 <?php echo csrf_field(); ?>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label class="required" for="From Date">title</label>
                     <input class="form-control <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>" type="text" name="title"
                         id="title" value="<?php echo e(old('name', ''), false); ?>" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label class="required" for="From Date">Description</label>
                     <input type="text" class="form-control" name="description" id="description" value=""
                         required />
                 </div>
-                <div class="form-group">
-                    <label class="" for="event_date">Event Date </label>
+                <div class="form-group mb-4">
+                    <label class="required" for="event_date">Event Date </label>
                     <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"
                         value=<?php echo e(date('Y-m-d'), false); ?>>
                 </div>
@@ -57,7 +57,12 @@
             window.location.href = "<?php echo e(URL::to('admin/gallary'), false); ?>"
         });
         $('#uploadfiles').click(function() {
-            myDropzone.processQueue();
+
+            if (myDropzone.files.length > 0) {
+                myDropzone.processQueue();
+            } else {
+                $('#dropzone').submit();
+            }
         });
         $(function() {
             $('.datetimepicker').datetimepicker({

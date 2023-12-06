@@ -268,6 +268,17 @@
                     </a>
                 </li>
             <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('canteen')): ?>
+                <li class="nav-item">
+                    <a href=<?php echo e(route('admin.canteen.index'), false); ?>
+
+                        class="nav-link <?php echo e(request()->is('admin/timetable') || request()->is('admin/timetable/*') ? 'active' : '', false); ?>">
+                        <i class="fa-fw fas fa-clock nav-icon">
+                        </i>
+                        Canteen
+                    </a>
+                </li>
+            <?php endif; ?>
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('lesson_access')): ?>
                 <li class="nav-item">
                     <a href="<?php echo e(route('admin.timetable.create'), false); ?>"

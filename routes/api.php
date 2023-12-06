@@ -2,6 +2,7 @@
 use App\Http\Controllers\Api02\EventsController;
 use App\Http\Controllers\Api02\GallaryController;
 use App\Http\Controllers\Api02\TrackingController;
+use App\Http\Controllers\Api02\CanteenController;
 use App\Http\Controllers\Api\V1\Admin\AnnouncementApiController;
 
 use App\Http\Controllers\Api\V1\Admin\UsersApiController;
@@ -100,5 +101,8 @@ Route::get('/events', [EventsController::class, 'getEvent']);
 Route::get('/gallary', [GallaryController::class, 'getGallary']);
 Route::post('/student',[UsersApiController::class,'updateStudent']);
 Route::post('/tracking',[TrackingController::class,'create']);
+Route::get('/menu',[CanteenController::class,'getMenu']);
 Route::post('/announcemen/create',[AnnouncementApiController::class,'createViewAnnouncement']);
-    Route::post('addfeedback','Api\V1\Admin\FeedbackApiController@addFeedback');
+Route::post('addfeedback','Api\V1\Admin\FeedbackApiController@addFeedback');
+Route::post('menu','Api\V1\Admin\UsersApiController@muteCanteenNotification');
+Route::get('test',[CanteenController::class,'gettest']);

@@ -355,8 +355,6 @@ class UsersApiController extends Controller
 
        
         $jsonArray = json_decode($this->isSuccessPush($fcmTokens,$title,$message,$data),true);
-        
-      
             return Response::json(array(
                                         'status' => true,
                                         'message' => 'Success Sent',
@@ -365,22 +363,25 @@ class UsersApiController extends Controller
     }
 
     public function send_notification(Request $request){
-   
             $title         = $request->input('title');
             $description   = $request->input('message');
             $token         = $request->input('token');
             $data = ['id'=> $request->input('id'), 'route' => $request->input('route')];
-    
             $jsonArray = json_decode($this->isSuccessPush($token,$title,$description,$data),true);
-
             return Response::json(array(
                                         'status' => true,
                                         'message' => 'Success Sent',
                                         'data' => $jsonArray
-                                        ));
-        
+            ));
     }
-
+    public function muteCanteenNotification (Request $request){
+    User::where('email', $request->user)->update(['mute_canteen' =>$request->mute ]);
+        return response()->json(
+        [
+        'status'=>true,
+        'message'=>'Successful',
+    ]);
+    }
     
     
 

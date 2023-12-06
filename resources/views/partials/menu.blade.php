@@ -251,6 +251,16 @@
                     </a>
                 </li>
             @endcan
+            @can('canteen')
+                <li class="nav-item">
+                    <a href={{ route('admin.canteen.index') }}
+                        class="nav-link {{ request()->is('admin/timetable') || request()->is('admin/timetable/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-clock nav-icon">
+                        </i>
+                        Canteen
+                    </a>
+                </li>
+            @endcan
             @can('lesson_access')
                 <li class="nav-item">
                     <a href="{{ route('admin.timetable.create') }}"
