@@ -14,22 +14,23 @@ use App\User;
 use App\MenuDetail;
 class CanteenController extends Controller
 {
-    public function getMenu(){
-        $menu =  Menu::orderBy('created_at','DESC')->get()->first();
+    public function getMenu(Request $request){
+        $menu =  Menu::where('menu_date','=',$request->date)->get()->first();
+        if($menu!=null){
         $menuDetail = MenuDetail::all()->where('menu_id',"=",$menu->id);
         $list =collect();
         foreach ($menuDetail as $items) {
             $list->push(asset('storage/image/' . $items->filename));
         }
-        return  response()->json([
-            "title"=>$menu->name,
+        return response()->json([
+            "status"=>200,
             "image"=>$list
         ],);
-    }
-    public function gettest(){
-        $user = Auth()->user();
-        return response()->json([
-            "data"=>$user,            
-        ]);
+        }else{
+            return response()->json([
+            "status"=>400,
+            "image"=>"Not fount menu today"
+            ],);
+        }
     }
 }

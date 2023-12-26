@@ -178,8 +178,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('gallary/destroyGallary','GallaryController@destroyGallary')->name('gallary.destroyGallary');
     
     // tracking
-    Route::get('tracking','TrackingController@index')->name('tracking.index');
-    Route::post('trsdfacking','TrackingController@search')->name('search.index');
+    Route::get('tracking','TrackMenuMobileController@index')->name('tracking.index');
     
     // canteen
     Route::get('canteen','CanteenController@index')->name('canteen.index');

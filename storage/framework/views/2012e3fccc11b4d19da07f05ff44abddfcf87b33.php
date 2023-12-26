@@ -224,14 +224,14 @@
                     </a>
                 </li>
             <?php endif; ?>
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('feedback')): ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('tracking')): ?>
                 <li class="nav-item">
                     <a href="<?php echo e(route('admin.tracking.index'), false); ?>"
                         class="nav-link <?php echo e(request()->is('admin/feedback/*') ? 'active' : '', false); ?>">
                         <i class="fa-fw fas fa-comment-dots nav-icon">
 
                         </i>
-                        Tracking
+                        Track Menu Mobile
                     </a>
                 </li>
             <?php endif; ?>

@@ -18,12 +18,11 @@
                 <div class="form-group"></div>
 
             </form>
-            <button class="btn btn-danger mt-3  pl-4 pr-4" type="submit" id="uploadfiles">
-                <?php echo e(trans('global.save'), false); ?> Only
+            <button class="btn btn-success mt-3  pl-4 pr-4" type="submit" id="uploadfiles">
+                <?php echo e(trans('global.save'), false); ?>
+
             </button>
-            <button class="btn btn-success mt-3  pl-4 pr-4 btn_send" type="submit">
-                <?php echo e(trans('global.save'), false); ?> & Send Notification
-            </button>
+            
         </div>
     </div>
 <?php $__env->stopSection(); ?>

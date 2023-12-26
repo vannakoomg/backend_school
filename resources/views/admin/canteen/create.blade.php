@@ -18,12 +18,12 @@
                 <div class="form-group"></div>
 
             </form>
-            <button class="btn btn-danger mt-3  pl-4 pr-4" type="submit" id="uploadfiles">
-                {{ trans('global.save') }} Only
+            <button class="btn btn-success mt-3  pl-4 pr-4" type="submit" id="uploadfiles">
+                {{ trans('global.save') }}
             </button>
-            <button class="btn btn-success mt-3  pl-4 pr-4 btn_send" type="submit">
+            {{-- <button class="btn btn-success mt-3  pl-4 pr-4 btn_send" type="submit">
                 {{ trans('global.save') }} & Send Notification
-            </button>
+            </button> --}}
         </div>
     </div>
 @endsection

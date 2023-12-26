@@ -21,14 +21,13 @@
                 <span>
                     {{ trans('global.list') }} of MEUN
                 </span>
-                <span class="float-right form-check form-switch">
+                {{-- <span class="float-right form-check form-switch">
                     <input type="checkbox" name="chk_show" class="form-check-input"
                         {{ request()->chk_show == 'on' ? 'checked' : '' }}>
                     <label class="form-check-label" for="flexCheckDefault">
                         Show Sent
                     </label>
-
-                </span>
+                </span> --}}
             </form>
         </div>
 
@@ -99,13 +98,7 @@
 
             $('.xzoom-gallery').bind('click', function(event) {
                 var div = $(this).parents('.xzoom-thumbs');
-                // var xzoom = $(this).data('xzoom');
-                // xzoom.closezoom();
-                // var gallery = xzoom.gallery().cgallery;
-                // var i, images = new Array();
-                // for (i in gallery) {
-                //     images[i] = {src: gallery[i]};
-                // }
+
                 images = new Array();
 
                 var img_length = div.find('img').length;

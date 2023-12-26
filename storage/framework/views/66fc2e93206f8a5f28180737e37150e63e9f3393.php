@@ -19,10 +19,7 @@
             <button class="btn btn-success mt-4" type="submit" id="update-btn">
                 <?php echo e(trans('global.save'), false); ?> Only
             </button>
-            <button class="btn btn-success mt-4" <?php if($menu->send === 1): ?> style="display: none" <?php endif; ?>
-                type="submit" id="update-notification">
-                <?php echo e(trans('global.save'), false); ?> And Sand Notification
-            </button>
+            
         </div>
     </div>
 <?php $__env->stopSection(); ?>

@@ -22,14 +22,7 @@
                 <span>
                     <?php echo e(trans('global.list'), false); ?> of MEUN
                 </span>
-                <span class="float-right form-check form-switch">
-                    <input type="checkbox" name="chk_show" class="form-check-input"
-                        <?php echo e(request()->chk_show == 'on' ? 'checked' : '', false); ?>>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Show Sent
-                    </label>
-
-                </span>
+                
             </form>
         </div>
 

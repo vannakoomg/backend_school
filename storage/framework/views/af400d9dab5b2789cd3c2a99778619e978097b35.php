@@ -50,7 +50,10 @@
         }
 
         .article-body {
-            padding: 20px;
+            padding: 10px;
+            /* overflow: hidden; */
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         article a {
@@ -173,10 +176,7 @@
                                                 </figure>
                                                 <div class="article-body">
                                                     <h2> <?php echo e($value02['title'], false); ?></h2>
-                                                    <p>
-                                                        <?php echo e($value02['description'], false); ?>
 
-                                                    </p>
                                                 </div>
                                             </div>
                                         </article>

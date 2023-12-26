@@ -50,7 +50,10 @@
         }
 
         .article-body {
-            padding: 20px;
+            padding: 10px;
+            /* overflow: hidden; */
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         article a {
@@ -172,9 +175,7 @@
                                                 </figure>
                                                 <div class="article-body">
                                                     <h2> {{ $value02['title'] }}</h2>
-                                                    <p>
-                                                        {{ $value02['description'] }}
-                                                    </p>
+
                                                 </div>
                                             </div>
                                         </article>

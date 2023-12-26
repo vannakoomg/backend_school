@@ -16,10 +16,9 @@ class CanteenController extends Controller
 {
     public function index(Request $request){
         if($request->chk_show=="on")
-            $menu  = Menu::where('send','1')->orderBy('created_at','DESC')->get();
+            $menu  = Menu::where('send','0')->orderBy('created_at','DESC')->get();
         else 
             $menu  = Menu::where('send','0')->orderBy('created_at','DESC')->get();
-        
         return view('admin.canteen.index',compact('menu'));
     }
     public function create(){
@@ -27,7 +26,6 @@ class CanteenController extends Controller
     }
     public function edit(Request $request){
         $menu = Menu::find($request->id);
-        // return $menu->send;
         return view('admin.canteen.edit',compact("menu"));
     }
     public function initPhoto(Request $request){
@@ -59,15 +57,15 @@ class CanteenController extends Controller
             ]);
         }
         }
-        if($request->save_send=='send'){
-        $token =DB::table('firebasetoken_user')
-            ->join("users","firebasetoken_user.user_id","=","users.id")
-            ->where("mute_canteen","=",1)
-            ->join("firebasetokens","firebasetoken_user.firebasetoken_id","=","firebasetokens.id")
-            ->pluck("firebasetokens.firebasekey")
-            ->toArray();
-        Notification::send(Auth()->user(),new FirebaseNotification("ICS",$request->title,$token,'Menu Today Is Coming',""),); 
-        }
+        // if($request->save_send=='send'){
+        // $token =DB::table('firebasetoken_user')
+        //     ->join("users","firebasetoken_user.user_id","=","users.id")
+        //     ->where("mute_canteen","=",1)
+        //     ->join("firebasetokens","firebasetoken_user.firebasetoken_id","=","firebasetokens.id")
+        //     ->pluck("firebasetokens.firebasekey")
+        //     ->toArray();
+        // Notification::send(Auth()->user(),new FirebaseNotification("ICS","a",$token,'Menu Today Is Coming',"ICS01"),); 
+        // }
         return redirect('admin/canteen'); 
     }
     public function destroy(Request $request ){
@@ -100,14 +98,14 @@ class CanteenController extends Controller
             "menu_id"=>$lastId->id,
         ]);
         }
-        if($request->save_send=='send'){
-        $token =DB::table('firebasetoken_user')
-            ->join("users","firebasetoken_user.user_id","=","users.id")
-            ->where("mute_canteen","=","1")
-            ->join("firebasetokens","firebasetoken_user.firebasetoken_id","=","firebasetokens.id")
-            ->pluck("firebasetokens.firebasekey")
-            ->toArray();
-        Notification::send(Auth()->user(),new FirebaseNotification("ICS","",$token,'Menu Today Is Coming',""),); 
-        }
+        // if($request->save_send=='send'){
+        // $token =DB::table('firebasetoken_user')
+        //     ->join("users","firebasetoken_user.user_id","=","users.id")
+        //     ->where("mute_canteen","=","1")
+        //     ->join("firebasetokens","firebasetoken_user.firebasetoken_id","=","firebasetokens.id")
+        //     ->pluck("firebasetokens.firebasekey")
+        //     ->toArray();
+        // Notification::send(Auth()->user(),new FirebaseNotification(count($token),"",$token,'Menu Today Is Coming',""),); 
+        // }
     }
 }

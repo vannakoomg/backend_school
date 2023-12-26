@@ -17,12 +17,12 @@
                 <input type="hidden" name="save_send" value="send">
             </form>
             <button class="btn btn-success mt-4" type="submit" id="update-btn">
-                {{ trans('global.save') }} Only
+                {{ trans('global.save') }}
             </button>
-            <button class="btn btn-success mt-4" @if ($menu->send === 1) style="display: none" @endif
+            {{-- <button class="btn btn-success mt-4" @if ($menu->send === 1) style="display: none" @endif
                 type="submit" id="update-notification">
                 {{ trans('global.save') }} And Sand Notification
-            </button>
+            </button> --}}
         </div>
     </div>
 @endsection

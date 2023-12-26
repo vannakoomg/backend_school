@@ -1,48 +1,39 @@
 
-
 <?php $__env->startSection('content'); ?>
     <div class="card">
         <div class="card-header">
-            Tracking <?php echo e(trans('global.list'), false); ?>
-
+            Track When User Click On Menu
         </div>
         <div class="card-body">
+
+            <div class="container-fluid text-center">
+                <div class="row align-items-start">
+                    <div class="col-8">
+                        <canvas id="chart"></canvas>
+                    </div>
+                    <div class="col-4 align-self-center">
+                        Summery MC and CC
+                        <canvas id="chartPie"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="table-responsive">
                 <form action="<?php echo e(route('admin.tracking.index'), false); ?>">
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="" for="name">Name </label>
-                            <input type="search" class="form-control mb-3" placeholder="Find name here" name="search"
-                                id="search" value="<?php echo e($search, false); ?>">
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label class="" for="from_date"> From date </label>
-                                <input id="startdate" name="fromdate" type="text" class="form-control datetimepicker"
-                                    value="<?php echo e($fromdate, false); ?>">
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label class="" for="to_date">To date </label>
-                                <input id="id" name="todate" type="text" class="form-control datetimepicker"
-                                    value="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-danger" type="submit">
-                            search
-                        </button>
-                    </div>
+                    
+                    
                 </form>
-                <table class=" table table-bordered table-striped table-hover datatable">
+                <table class=" table table-sm table-bordered table-striped table-hover datatable datatable-SchoolClass">
                     <thead>
                         <tr>
                             <th width="10">
                             </th>
                             <th>
-                                Name
+                                User Name
+                            </th>
+                            <th>
+                                Menu Name
                             </th>
                             <th>Date</th>
                         </tr>
@@ -52,9 +43,12 @@
                             <tr data-entry-id="<?php echo e($trackee->id, false); ?>">
                                 <td>
                                 </td>
-
                                 <td>
-                                    <?php echo e($trackee->name ?? '', false); ?>
+                                    <?php echo e($trackee->user_name ?? '', false); ?>
+
+                                </td>
+                                <td>
+                                    <?php echo e($trackee->menu_name ?? '', false); ?>
 
                                 </td>
                                 <td>
@@ -67,49 +61,133 @@
                 </table>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+        <script>
+            const pie = document.getElementById("chartPie").getContext('2d');
+            const chartPie = new Chart(pie, {
+                type: 'pie',
+                data: {
+                    labels: ["MC", "CC"],
+                    datasets: [{
+                        // label: ["jdfkdsjf", "dsfdsaf"],
+                        backgroundColor: [
+                            'rgba(134, 39, 39, 1)',
+                            'rgba(49, 150, 54, 1)',
+                        ],
+                        borderColor: 'rgba(134, 39, 39, 1)',
+                        data: [<?php echo e($chart['mc'], false); ?>, <?php echo e($chart['cc'], false); ?>],
+                    }]
+                },
+            });
+        </script>
+        <script>
+            const ctx = document.getElementById("chart").getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        "News", "Attendance", "Timetable", "Exam Schendules",
+                        "Report Cart", "Events", "Gallery", "Assignments",
+                        "Assignment Results", "Pick Up", "E-Learing",
+                        "Feeback", "Canteen", "Contact Us", "About Us", "Profile", "Notification"
+                    ],
+                    datasets: [{
+
+                        label: 'Click',
+                        backgroundColor: [
+                            'rgba(226, 92, 40, 1)',
+                            'rgba(41, 120, 224, 1)',
+                            'rgba(226, 92, 40, 1)',
+                            'rgba(41, 120, 224, 1)',
+                            'rgba(226, 92, 40, 1)',
+                            'rgba(41, 120, 224, 1)',
+                            'rgba(226, 92, 40, 1)',
+                            'rgba(41, 120, 224, 1)',
+                            'rgba(226, 92, 40, 1)',
+                            'rgba(41, 120, 224, 1)',
+                            'rgba(226, 92, 40, 1)',
+                            'rgba(41, 120, 224, 1)',
+                            'rgba(226, 92, 40, 1)',
+                            'rgba(41, 120, 224, 1)',
+                            'rgba(226, 92, 40, 1)',
+                            'rgba(41, 120, 224, 1)',
+                            'rgba(226, 92, 40, 1)',
+
+                        ],
+                        borderColor: 'rgb(47, 128, 237)',
+                        data: [
+                            <?php echo e($chart['new'], false); ?>,
+                            <?php echo e($chart['attendance'], false); ?>,
+                            <?php echo e($chart['timetable'], false); ?>,
+                            <?php echo e($chart['examSchendules'], false); ?>,
+                            <?php echo e($chart['reportCart'], false); ?>,
+                            <?php echo e($chart['events'], false); ?>,
+                            <?php echo e($chart['gallery'], false); ?>,
+                            <?php echo e($chart['assignments'], false); ?>,
+                            <?php echo e($chart['assignmentResults'], false); ?>,
+                            <?php echo e($chart['pickup'], false); ?>,
+                            <?php echo e($chart['elearing'], false); ?>,
+                            <?php echo e($chart['feedback'], false); ?>,
+                            <?php echo e($chart['canteen'], false); ?>,
+                            <?php echo e($chart['contactUs'], false); ?>,
+                            <?php echo e($chart['aboutUs'], false); ?>,
+                            <?php echo e($chart['profile'], false); ?>,
+                            <?php echo e($chart['notification'], false); ?>,
+
+                        ],
+                    }]
+                },
+                options: {
+
+                    legend: {
+                        display: false,
+
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+
+                                beginAtZero: true,
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                maxRotation: 90, // Rotate labels by 90 degrees
+                                minRotation: 0, // Reset rotation angle
+                            }
+                        }],
+                    }
+
+                },
+            });
+        </script>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scripts'); ?>
     <?php echo \Illuminate\View\Factory::parentPlaceholder('scripts'); ?>
+
     <script>
         $(function() {
-            let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('lesson_delete')): ?>
-                let deleteButtonTrans = '<?php echo e(trans('global.datatables.delete'), false); ?>'
-            <?php endif; ?>
-            $.extend(true, $.fn.dataTable.defaults, {
-                order: [
-                    [1, 'desc']
-                ],
-                pageLength: 50,
+            $('input[type="checkbox"]').on("change", function() {
+                $('#form1').submit();
             });
-            $('.datatable-Lesson:not(.ajaxTable)').DataTable({
+            let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+            $.extend(true, $.fn.dataTable.defaults, {
+                pageLength: 30,
+            });
+            $('.datatable-SchoolClass:not(.ajaxTable)').DataTable({
                 buttons: dtButtons
             })
             $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();
             });
+            $(function() {
+                $('.datetimepicker').datetimepicker({
+                    format: 'YYYY/MM/DD'
+                });
+            });
         })
-        // $('#search').on('keyup', function() {
-        //     $value = $(this).val();
-        //     $.ajax({
-        //         type: 'get',
-        //         url: "<?php echo e(route('admin.tracking.index'), false); ?>",
-        //         data: {
-        //             'name': $value
-        //         },
-
-        //     })
-        // });
-        // window.onload = function() {
-        //     document.getElementById("search").focus();
-        // };
-        $(function() {
-            $('.datetimepicker').datetimepicker({
-                format: 'YYYY/MM/DD'
-            });;
-        });
     </script>
 <?php $__env->stopSection(); ?>
 

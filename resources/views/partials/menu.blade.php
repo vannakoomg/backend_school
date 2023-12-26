@@ -210,14 +210,14 @@
                     </a>
                 </li>
             @endcan
-            @can('feedback')
+            @can('tracking')
                 <li class="nav-item">
                     <a href="{{ route('admin.tracking.index') }}"
                         class="nav-link {{ request()->is('admin/feedback/*') ? 'active' : '' }}">
                         <i class="fa-fw fas fa-comment-dots nav-icon">
 
                         </i>
-                        Tracking
+                        Track Menu Mobile
                     </a>
                 </li>
             @endcan
