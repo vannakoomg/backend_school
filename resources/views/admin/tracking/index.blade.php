@@ -12,8 +12,8 @@
                         <canvas id="chart"></canvas>
                     </div>
                     <div class="col-4 align-self-center">
-                        Summery MC and CC
-                        <canvas id="chartPie"></canvas>
+                        Summary
+                        <canvas id="chartPie" class=""></canvas>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
             const chartPie = new Chart(pie, {
                 type: 'pie',
                 data: {
-                    labels: ["MC", "CC"],
+                    labels: ["MC:  {{ $chart['mc'] }}", "CC :  {{ $chart['cc'] }}"],
                     datasets: [{
                         // label: ["jdfkdsjf", "dsfdsaf"],
                         backgroundColor: [

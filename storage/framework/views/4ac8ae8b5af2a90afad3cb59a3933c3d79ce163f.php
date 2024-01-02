@@ -12,10 +12,9 @@
                         <canvas id="chart"></canvas>
                     </div>
                     <div class="col-4 align-self-center">
-                        Summery MC and CC
-                        <canvas id="chartPie"></canvas>
+                        Summary
+                        <canvas id="chartPie" class=""></canvas>
                     </div>
-
                 </div>
             </div>
 
@@ -67,7 +66,7 @@
             const chartPie = new Chart(pie, {
                 type: 'pie',
                 data: {
-                    labels: ["MC", "CC"],
+                    labels: ["MC:  <?php echo e($chart['mc'], false); ?>", "CC :  <?php echo e($chart['cc'], false); ?>"],
                     datasets: [{
                         // label: ["jdfkdsjf", "dsfdsaf"],
                         backgroundColor: [

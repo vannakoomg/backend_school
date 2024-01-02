@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\GallaryDetile;
 use App\Gallary;
 use DateTime;
+use Illuminate\Support\Facades\Storage;
 
 use App\Image;
 class GallaryController extends Controller
@@ -140,12 +141,15 @@ class GallaryController extends Controller
         $gallary = Gallary::find($request->id);
         $gallary->delete();
         $gallaryDetail = GallaryDetile::all()->where("gallary_id","=",$request->id);
+        foreach ($gallaryDetail as $value) {
+                Storage::delete(['image/' . $value->filename]);
+        }        
         GallaryDetile::destroy($gallaryDetail);
         return redirect('admin/gallary');    
     }
-     public function destroy(Request $request ){
+    public function destroy(Request $request ){
         $gallaryDetail = GallaryDetile::find($request->id);
+            Storage::delete(['image/' . $gallaryDetail->filename]);
         $gallaryDetail->delete();  
     }
-
 }
