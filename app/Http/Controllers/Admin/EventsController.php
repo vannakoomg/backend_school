@@ -68,6 +68,4 @@ class EventsController extends Controller
       ]);  
       return redirect('admin/events');  
     }    
-
-    
 }

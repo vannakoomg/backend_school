@@ -15,7 +15,7 @@ use App\MenuDetail;
 class CanteenController extends Controller
 {
     public function getMenu(Request $request){
-        $menu =  Menu::where('menu_date','=',$request->date)->get()->first();
+        $menu =  Menu::latest('id')->first();
         if($menu!=null){
         $menuDetail = MenuDetail::all()->where('menu_id',"=",$menu->id);
         $list =collect();
@@ -24,6 +24,7 @@ class CanteenController extends Controller
         }
         return response()->json([
             "status"=>200,
+            "daa"=>$menuDetail,
             "image"=>$list
         ],);
         }else{

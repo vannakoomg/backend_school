@@ -53,5 +53,11 @@ class EventsController extends Controller
     return response()->json([
                 "data"=>$allEvent
             ],);
-    }   
+    } 
+    public function truncateTable()
+    {
+        EventsType::truncate();
+        Event::truncate();
+        return response()->json(['message' => 'Table  Event Type and Events truncated successfully']);
+    }  
 }

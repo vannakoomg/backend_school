@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Events
+            Eventsevent_type_id
         </div>
         <div class="card-body">
             <div class="container-fluid">

@@ -106,3 +106,4 @@ Route::get('/menu',[CanteenController::class,'getMenu']);
 Route::post('/announcemen/create',[AnnouncementApiController::class,'createViewAnnouncement']);
 Route::post('addfeedback','Api\V1\Admin\FeedbackApiController@addFeedback');
 Route::post('menu','Api\V1\Admin\UsersApiController@muteCanteenNotification');
+Route::post('truncateTable', [EventsController::class, 'truncateTable']);
