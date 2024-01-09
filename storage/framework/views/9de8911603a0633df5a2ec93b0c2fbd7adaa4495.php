@@ -47,7 +47,7 @@
             resizeQuality: 0.5,
             addRemoveLinks: "true",
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<button class="btn btn-info mt-4 " >  Browse File  </button>',
+            dictDefaultMessage: '<dev class="btn btn-info mt-4 " >  Browse File  </dev>',
             dictResponseError: 'Error uploading file!',
             createImageThumbnails: true,
             dictRemoveFile: "Remove",

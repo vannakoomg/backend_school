@@ -9,13 +9,13 @@
                 id="dropzone">
                 <?php echo csrf_field(); ?>
                 <div class="form-group">
-                    <label class="" for="event_date">Event Date </label>
+                    <label class="required" for="event_date">Date </label>
                     <input id="menu_date" name="menu_date" type="text" class="form-control datetimepicker"
                         value=<?php echo e(date('Y-m-d'), false); ?>>
+                    <input type="hidden" name="save_send" value="send">
+                    <label class="required pt-5" for="event_date">Photo </label>
                 </div>
-                <input type="hidden" name="save_send" value="send">
-                <label class="" for="event_date">Photo meun </label>
-                <div class="form-group"></div>
+
 
             </form>
             <button class="btn btn-success mt-3  pl-4 pr-4" type="submit" id="uploadfiles">
@@ -42,7 +42,7 @@
             resizeQuality: 0.5,
             addRemoveLinks: "true",
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<button class="btn btn-info mt-4 " >  Browse File  </button>',
+            dictDefaultMessage: '<dev class="btn btn-info mt-4 " >  Browse File  </dev>',
             dictResponseError: 'Error uploading file!',
             createImageThumbnails: true,
             dictRemoveFile: "Remove",

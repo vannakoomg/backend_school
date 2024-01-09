@@ -46,28 +46,26 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
-
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="required" for="From Date">title</label>
+                    <label class="required" for="From Date">Title</label>
                     <input class="form-control <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>" type="text"
                         name="title" id="title" value="<?php echo e($event->title, false); ?>" required>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-success" type="submit">
+                <div class="form-group pt-5">
+                    <button class="btn btn-success mr-1" type="submit">
                         <?php echo e(trans('global.update'), false); ?>
 
                     </button>
                     <a class="btn btn-danger" href="<?php echo e(route('admin.events.destroy', $event->id), false); ?>">
-                        delete event
+                        Delete
                     </a>
                 </div>
             </form>
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('scripts'); ?>
     <?php echo \Illuminate\View\Factory::parentPlaceholder('scripts'); ?>
     <script>

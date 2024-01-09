@@ -148,15 +148,14 @@
 <?php $__env->startSection('content'); ?>
     <div class="card">
         <div class="card-header">
-            <?php echo e(trans('global.create'), false); ?>
-
+            Gallery
         </div>
         <div class="card-body bg-instagram">
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_class_create')): ?>
                 <div style="margin-bottom: 20px;" class="row">
                     <div class="col-lg-12">
                         <a class="btn btn-success" href="<?php echo e(route('admin.gallary.create'), false); ?>">
-                            Add Gallary
+                            Add
                         </a>
                     </div>
                 </div>

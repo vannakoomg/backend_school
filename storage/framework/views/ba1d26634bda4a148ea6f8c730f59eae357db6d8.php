@@ -52,7 +52,7 @@
                         name="title" id="title" value="<?php echo e(old('name', ''), false); ?>" required>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-danger" type="submit">
+                    <button class="btn btn-success" type="submit">
                         <?php echo e(trans('global.save'), false); ?>
 
                     </button>

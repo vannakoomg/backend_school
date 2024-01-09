@@ -10,14 +10,16 @@
                 class="dropzone" id="dropzone">
                 <?php echo csrf_field(); ?>
                 <div class="form-group">
-                    <label class="" for="event_date">Menu Date </label>
+                    <label class="required" for="event_date">Date </label>
                     <input id="menu_date" name="menu_date" type="text" class="form-control datetimepicker"
                         value="<?php echo e($menu->menu_date, false); ?>">
+                    <label class="required pt-5" for="event_date">Photo</label>
                 </div>
                 <input type="hidden" name="save_send" value="send">
             </form>
             <button class="btn btn-success mt-4" type="submit" id="update-btn">
-                <?php echo e(trans('global.save'), false); ?> Only
+                <?php echo e(trans('global.save'), false); ?>
+
             </button>
             
         </div>
@@ -34,7 +36,7 @@
             maxFilesize: 100, //maximum file size 2MB
             maxFiles: 100,
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<button class="btn btn-info mt-4 ">  Browse File  </button>',
+            dictDefaultMessage: '<dev class="btn btn-info mt-4 ">  Browse File  </dev>',
             dictResponseError: 'Error uploading file!',
             parallelChunkUploads: true,
             createImageThumbnails: true,

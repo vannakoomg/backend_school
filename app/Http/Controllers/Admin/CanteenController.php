@@ -11,6 +11,8 @@ use Notification;
 use App\Notifications\FirebaseNotification;
 use App\Firebasetoken;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class CanteenController extends Controller
 {
@@ -37,6 +39,9 @@ class CanteenController extends Controller
         if( $menu!=null){
         $menu->delete();
         $menuDetail = MenuDetail::all()->where("menu_id","=",$id);
+        foreach ($menuDetail as $value) {
+            Storage::delete(['image/' . $value->filename]);
+        }
         MenuDetail::destroy($menuDetail);
         return redirect('admin/canteen'); 
         }
@@ -70,6 +75,7 @@ class CanteenController extends Controller
     }
     public function destroy(Request $request ){
         $menuDetail = MenuDetail::find($request->id);
+        Storage::delete(['image/' . $menuDetail->filename]);
         $menuDetail->delete();  
     }
 

@@ -41,7 +41,7 @@
             maxFilesize: 100, //maximum file size 2MB
             maxFiles: 100,
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<button class="btn btn-info mt-4 " >  Browse File  </button>',
+            dictDefaultMessage: '<dev class="btn btn-info mt-4 " >  Browse File  </dev>',
             dictResponseError: 'Error uploading file!',
             parallelChunkUploads: true,
             createImageThumbnails: true,

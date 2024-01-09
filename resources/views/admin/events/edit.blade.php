@@ -45,27 +45,25 @@
                                 @endforeach
                             </select>
                         </div>
-
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="required" for="From Date">title</label>
+                    <label class="required" for="From Date">Title</label>
                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text"
                         name="title" id="title" value="{{ $event->title }}" required>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-success" type="submit">
+                <div class="form-group pt-5">
+                    <button class="btn btn-success mr-1" type="submit">
                         {{ trans('global.update') }}
                     </button>
                     <a class="btn btn-danger" href="{{ route('admin.events.destroy', $event->id) }}">
-                        delete event
+                        Delete
                     </a>
                 </div>
             </form>
         </div>
     </div>
 @endsection
-
 @section('scripts')
     @parent
     <script>

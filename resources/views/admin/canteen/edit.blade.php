@@ -10,9 +10,10 @@
                 class="dropzone" id="dropzone">
                 @csrf
                 <div class="form-group">
-                    <label class="" for="event_date">Menu Date </label>
+                    <label class="required" for="event_date">Date </label>
                     <input id="menu_date" name="menu_date" type="text" class="form-control datetimepicker"
                         value="{{ $menu->menu_date }}">
+                    <label class="required pt-5" for="event_date">Photo</label>
                 </div>
                 <input type="hidden" name="save_send" value="send">
             </form>
@@ -37,7 +38,7 @@
             maxFilesize: 100, //maximum file size 2MB
             maxFiles: 100,
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<button class="btn btn-info mt-4 ">  Browse File  </button>',
+            dictDefaultMessage: '<dev class="btn btn-info mt-4 ">  Browse File  </dev>',
             dictResponseError: 'Error uploading file!',
             parallelChunkUploads: true,
             createImageThumbnails: true,

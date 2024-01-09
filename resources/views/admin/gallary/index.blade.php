@@ -76,7 +76,7 @@
             opacity: var(--link-icon-opacity);
             transition: all 0.3s;
         }
-        
+
         /* using the has() relational pseudo selector to update our custom properties */
         article:has(:hover, :focus) {
             --img-scale: 1.1;
@@ -148,14 +148,14 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            {{ trans('global.create') }}
+            Gallery
         </div>
         <div class="card-body bg-instagram">
             @can('school_class_create')
                 <div style="margin-bottom: 20px;" class="row">
                     <div class="col-lg-12">
                         <a class="btn btn-success" href="{{ route('admin.gallary.create') }}">
-                            Add Gallary
+                            Add
                         </a>
                     </div>
                 </div>
