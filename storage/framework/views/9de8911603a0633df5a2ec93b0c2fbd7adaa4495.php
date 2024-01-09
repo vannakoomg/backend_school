@@ -9,7 +9,7 @@
                 id="dropzone">
                 <?php echo csrf_field(); ?>
                 <div class="form-group mb-4">
-                    <label class="required" for="From Date">title</label>
+                    <label class="required" for="From Date">Title</label>
                     <input class="form-control <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>" type="text" name="title"
                         id="title" value="<?php echo e(old('name', ''), false); ?>" required>
                 </div>

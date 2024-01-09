@@ -9,7 +9,7 @@
                 id="dropzone">
                 @csrf
                 <div class="form-group mb-4">
-                    <label class="required" for="From Date">title</label>
+                    <label class="required" for="From Date">Title</label>
                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="title"
                         id="title" value="{{ old('name', '') }}" required>
                 </div>

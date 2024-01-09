@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
-                            <label class="" for="from_date"> Start Date </label>
+                            <label class="required" for="from_date"> Start Date </label>
                             <input id="startdate" name="startdate" type="text"
                                 class="form-control datetimepicker <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>"
                                 value="<?php echo e(old('name', ''), false); ?>" required>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label class="" for="to_date">End Date </label>
+                            <label class="required" for="to_date">End Date </label>
                             <input id="id" name="end_date" type="text"
                                 class="form-control datetimepicker <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>"
                                 value="<?php echo e(old('name', ''), false); ?>" required>
@@ -44,11 +44,10 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
-
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="required" for="From Date">title</label>
+                    <label class="required" for="From Date">Title</label>
                     <input class="form-control <?php echo e($errors->has('name') ? 'is-invalid' : '', false); ?>" type="text"
                         name="title" id="title" value="<?php echo e(old('name', ''), false); ?>" required>
                 </div>

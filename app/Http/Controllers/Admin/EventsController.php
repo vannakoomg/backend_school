@@ -29,6 +29,10 @@ class EventsController extends Controller
       return $data;
     }
     public function store(Request $request){
+      $request->validate([
+      'startdate' => 'required|date',
+      'end_date' => 'required|date|after_or_equal:startdate',
+      ]);
         $end  = new DateTime($request->end_date);
         $end= $end->modify('+1 day' );
         $endString= $end->format('Y-m-d');
@@ -56,6 +60,10 @@ class EventsController extends Controller
       return view('admin.events.edit', compact('eventsType',"event","endddd"));
     }
     public function update(Request $request){
+      $request->validate([
+      'startdate' => 'required|date',
+      'end_date' => 'required|date|after_or_equal:startdate',
+      ]);
       $event  = Event::find($request->id);
         $end  = new DateTime($request->end_date);
         $end= $end->modify('+1 day' );

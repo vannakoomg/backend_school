@@ -76,7 +76,7 @@
             opacity: var(--link-icon-opacity);
             transition: all 0.3s;
         }
-
+        
         /* using the has() relational pseudo selector to update our custom properties */
         article:has(:hover, :focus) {
             --img-scale: 1.1;

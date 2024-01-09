@@ -20,8 +20,7 @@
 
             <div class="table-responsive">
                 <form action="<?php echo e(route('admin.tracking.index'), false); ?>">
-                    
-                    
+
                 </form>
                 <table class=" table table-sm table-bordered table-striped table-hover datatable datatable-SchoolClass">
                     <thead>

@@ -20,37 +20,7 @@
 
             <div class="table-responsive">
                 <form action="{{ route('admin.tracking.index') }}">
-                    {{-- <div class="row">
-                        <div class="col-3">
-                            <label class="" for="name">User Name</label>
-                            <input type="user_name" class="form-control mb-3" placeholder="Find name here" name="user_name"
-                                id="user_name" value="{{ $user_name }}">
-                        </div>
-                        <div class="col-3">
-                            <label class="" for="name">Menu Name</label>
-                            <input type="menu_name" class="form-control mb-3" placeholder="Find name here" name="menu_name"
-                                id="menu_name" value="{{ $menu_name }}">
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label class="" for="from_date"> From date </label>
-                                <input id="startdate" name="fromdate" type="text" class="form-control datetimepicker"
-                                    value="{{ $fromdate }}">
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label class="" for="to_date">To date </label>
-                                <input id="id" name="todate" type="text" class="form-control datetimepicker"
-                                    value="">
-                            </div>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="form-group">
-                        <button class="btn btn-danger" type="submit">
-                            Search
-                        </button>
-                    </div> --}}
+
                 </form>
                 <table class=" table table-sm table-bordered table-striped table-hover datatable datatable-SchoolClass">
                     <thead>
