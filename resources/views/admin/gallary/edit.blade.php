@@ -13,11 +13,11 @@
                     <label class="required" for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" value="{{ $gallary->name }}" />
                 </div>
-                <div class="form-group mb-4">
+                {{-- <div class="form-group mb-4">
                     <label class="required " for="description">Description</label>
                     <input type="text" class="form-control" name="description" id="description"
                         value="{{ $gallary->description }}" />
-                </div>
+                </div> --}}
                 <div class="form-group mb-4">
                     <label class="required" for="event_date">Event Date </label>
                     <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"

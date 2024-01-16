@@ -13,11 +13,11 @@
                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="title"
                         id="title" value="{{ old('name', '') }}" required>
                 </div>
-                <div class="form-group mb-4">
+                {{-- <div class="form-group mb-4">
                     <label class="required" for="From Date">Description</label>
                     <input type="text" class="form-control" name="description" id="description" value=""
                         required />
-                </div>
+                </div> --}}
                 <div class="form-group mb-4">
                     <label class="required" for="event_date">Event Date </label>
                     <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"

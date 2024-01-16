@@ -81,9 +81,9 @@
                 type: 'bar',
                 data: {
                     labels: [
-                        "News", "Attendance", "Timetable", "Exam Schendules",
-                        "Report Cart", "Events", "Gallery", "Assignments",
-                        "Assignment Results", "Pick Up", "E-Learing",
+                        "News", "Attendance", "Timetable", "Exam Schedules",
+                        "Report Card", "Events", "Gallery", "Assignments",
+                        "Assignment Results", "Pick Up", "E-Leaning",
                         "Feeback", "Canteen", "Contact Us", "About Us", "Profile", "Notification"
                     ],
                     datasets: [{

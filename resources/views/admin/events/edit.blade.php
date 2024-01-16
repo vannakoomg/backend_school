@@ -25,15 +25,6 @@
                                 value="{{ $endddd }}" required>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label class="required" for="time">Time</label>
-                            <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text"
-                                name="time" id="name" value="{{ $event->time }}" required>
-                        </div>
-                    </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label class="" for="template_id">Evnet Type</label>
@@ -49,8 +40,12 @@
                 </div>
                 <div class="form-group">
                     <label class="required" for="From Date">Title</label>
-                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text"
-                        name="title" id="title" value="{{ $event->title }}" required>
+                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="title"
+                        id="title" value="{{ $event->title }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Description</label>
+                    <input class="form-control" type="text" name="time" id="name" value="{{ $event->time }}">
                 </div>
                 <div class="form-group pt-5">
                     <button class="btn btn-success mr-1" type="submit">

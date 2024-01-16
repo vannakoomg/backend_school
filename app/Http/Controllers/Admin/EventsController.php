@@ -40,7 +40,7 @@ class EventsController extends Controller
                 'title' => $request->title,
                 'start' => $request->startdate,
                 'end' => $endString,
-                'time' => $request->time,
+                'time' => $request->time??"",
                 'event_type_id' => $request->event_type_id,
                 'create_owner'=>auth()->user()->name
             );
@@ -72,7 +72,7 @@ class EventsController extends Controller
         "start"=>$request->startdate,
         "end"=> $end, 
         "event_type_id"=>$request->event_type_id+1,
-        "time"=>$request->time,
+        "time"=>$request->time??"",
       ]);  
       return redirect('admin/events');  
     }    

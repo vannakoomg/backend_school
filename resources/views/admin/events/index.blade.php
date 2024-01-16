@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Eventsevent_type_id
+            Event
         </div>
         <div class="card-body">
             <div class="container-fluid">
@@ -43,7 +43,7 @@
                     } else {
                         event.allDay = false;
                     }
-                    $color = "#" + event.color;
+                    $color = event.color;
                     element.css('background-color', $color);
                 },
                 selectable: true,

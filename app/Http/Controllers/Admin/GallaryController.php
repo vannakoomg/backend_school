@@ -33,7 +33,6 @@ class GallaryController extends Controller
             $galddd->push([
                     "id"=>$gal->id,
                         "title"=>$gal->name,
-                        "description"=>$gal->description,
                         "image"=> $image,
                         "date"=>$time->format('Y-m-d'),
                 ],);
@@ -50,7 +49,6 @@ class GallaryController extends Controller
                         "id"=>$gal->id,
                         "title"=>$gal->name,
                         "image"=> $image, 
-                        "description"=>$gal->description,
                         "date"=>$time->format('Y-m-d'),
                     ]);
                     $isdulicat =1;
@@ -75,14 +73,12 @@ class GallaryController extends Controller
         ];
         request()->validate([
             'title' => 'required',
-            'description' => 'required',
             'event_date' => 'required',
             'file' => 'required',
             
         ],$messages);
         $data = array(
             "name"=>$request->title,
-            "description"=>$request->description,
             "event_date"=>$request->event_date,
         );
         Gallary::create($data);
@@ -93,7 +89,7 @@ class GallaryController extends Controller
         $image = \Image::make(file_get_contents($files));
         $image->save(\storage_path('app/public/image/'.$filename),"15");
         GallaryDetile::create([
-            'filename' => $filename,
+            'filename' =>  $filename,
             "gallary_id"=>$lastId->id,
         ]);
         }
@@ -114,14 +110,12 @@ class GallaryController extends Controller
         ];
         request()->validate([
             'title' => 'required',
-            'description' => 'required',
             'event_date' => 'required',
             // 'file' => 'required',
             
         ],$messages);
         $gallary = Gallary::find($id);
         $gallary->name = $request->title;
-        $gallary->description=$request->description;
         $gallary->event_date =$request->event_date;
         $gallary->save();
         if(!empty($request->file('file'))){

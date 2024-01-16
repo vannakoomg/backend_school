@@ -22,9 +22,7 @@
                             <th>
                                 {{ trans('cruds.schoolClass.fields.name') }}
                             </th>
-                            <th>
-                                Color Code
-                            </th>
+
                             <th>
                                 &nbsp;
                             </th>
@@ -38,9 +36,9 @@
                                 <td>
                                     {{ $type->name ?? '' }}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $type->color ?? '' }}
-                                </td>
+                                </td> --}}
 
                                 <td>
                                     @can('school_class_edit')

@@ -26,7 +26,7 @@ class EventsController extends Controller
             $color_code = EventsType::find($e->event_type_id);
             $title->push([
                     "title"=>$e->title,
-                    "action_color"=>"0XFF$color_code->color",
+                    "action_color"=>"0XFF" .substr($color_code->color, 1),
                     "time"=>$e->time
                 ],);
             $isdulicat=0;
@@ -36,7 +36,7 @@ class EventsController extends Controller
                 $color_code = EventsType::find($e->event_type_id);
                 $allEvent[$key]['event']->push([
                 "title"=>$e->title,
-                "action_color"=>"0XFF$color_code->color",
+                "action_color"=>"0XFF" .substr($color_code->color, 1),
                 "time"=>$e->time
                 ]);
                 $isdulicat=1;

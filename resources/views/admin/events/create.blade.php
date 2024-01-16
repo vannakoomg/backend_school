@@ -25,19 +25,10 @@
                                 value="{{ old('name', '') }}" required>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label class="required" for="time">Time</label>
-                            <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text"
-                                name="time" id="name" value="{{ old('name', '') }}" required>
-                        </div>
-                    </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label class="" for="template_id">Event Type</label>
-                            <select name='event_type_id' class="custom-select select2">
+                            <select name='event_type_id' class="custom-select select2 ">
                                 @foreach ($eventsType as $Type)
                                     <option value="{{ $Type->id }}">{{ $Type->name }}</option>
                                 @endforeach
@@ -47,9 +38,14 @@
                 </div>
                 <div class="form-group">
                     <label class="required" for="From Date">Title</label>
-                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text"
-                        name="title" id="title" value="{{ old('name', '') }}" required>
+                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="title"
+                        id="title" value="{{ old('name', '') }}" required>
                 </div>
+                <div class="form-group">
+                    <label for="time">Description</label>
+                    <input class="form-control " type="text" name="time" id="name" value="">
+                </div>
+
                 <div class="form-group">
                     <button class="btn btn-success" type="submit">
                         {{ trans('global.save') }}
