@@ -50,7 +50,7 @@ class EventsController extends Controller
     public function destroy($id){
       $result = Event::find($id);
       $result->delete();
-      return redirect('admin/events');      
+      return redirect('admin/events');
     }
     public function edit(Request $request){
       $event= Event::find($request->id);

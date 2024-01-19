@@ -14,7 +14,6 @@ use Carbon\CarbonPeriod;
 class AttendanceController extends Controller
 {
     public function index(Request $request){
-    
     if($request->has('campus'))
         $selected_campus=SchoolClass::where('campus',$request->input('campus'))->first();
     else

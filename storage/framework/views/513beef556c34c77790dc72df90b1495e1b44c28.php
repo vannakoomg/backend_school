@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label class="" for="template_id">Event Type</label>
                             <select name='event_type_id' class="custom-select select2 ">
-                                <?php $__currentLoopData = $eventsType; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $eventsType; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $Type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option value="<?php echo e($Type->id, false); ?>"><?php echo e($Type->name, false); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>

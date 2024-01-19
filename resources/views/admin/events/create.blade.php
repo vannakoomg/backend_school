@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label class="" for="template_id">Event Type</label>
                             <select name='event_type_id' class="custom-select select2 ">
-                                @foreach ($eventsType as $Type)
+                                @foreach ($eventsType as $index => $Type)
                                     <option value="{{ $Type->id }}">{{ $Type->name }}</option>
                                 @endforeach
                             </select>
