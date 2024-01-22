@@ -28,7 +28,10 @@
                             <th width="10">
                             </th>
                             <th>
-                                User Name
+                                Student ID
+                            </th>
+                            <th>
+                                Student Name
                             </th>
                             <th>
                                 Menu Name
@@ -43,6 +46,9 @@
                                 </td>
                                 <td>
                                     {{ $trackee->user_name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $trackee->name ?? '' }}
                                 </td>
                                 <td>
                                     {{ $trackee->menu_name ?? '' }}

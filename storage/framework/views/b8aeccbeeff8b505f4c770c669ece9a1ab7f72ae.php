@@ -28,7 +28,10 @@
                             <th width="10">
                             </th>
                             <th>
-                                User Name
+                                Student ID
+                            </th>
+                            <th>
+                                Student Name
                             </th>
                             <th>
                                 Menu Name
@@ -43,6 +46,10 @@
                                 </td>
                                 <td>
                                     <?php echo e($trackee->user_name ?? '', false); ?>
+
+                                </td>
+                                <td>
+                                    <?php echo e($trackee->name ?? '', false); ?>
 
                                 </td>
                                 <td>
