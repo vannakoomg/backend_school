@@ -48,6 +48,11 @@ class User extends Authenticatable
         'class_id',
         'created_at',
         'updated_at',
+        'nationality',
+        'birth_date',
+        'gender',
+        'present_class',
+        'start_date',
         //'deleted_at',
         'email_verified_at',
         'is_checkout',
@@ -58,7 +63,15 @@ class User extends Authenticatable
     //     return $this->morphToMany(Resource::class, 'notifiable', 'notifications');
 
     // }
-
+    public function parent(){
+        return $this->hasMany(Parents::class,"user_id");
+    }
+    public function sibling(){
+        return $this->hasMany(Sibling::class,"user_id");
+    }
+    public function studyHistory(){
+        return $this->hasMany(StudyHistory::class,"user_id");
+    }
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('id', 1)->exists();

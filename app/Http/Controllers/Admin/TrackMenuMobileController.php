@@ -59,6 +59,6 @@ class TrackMenuMobileController extends Controller
     $user =User::where('email' ,"=",$t->user_name)->get()->first();
         $track[$index]->name =  $user->name;
     }
-    return view('admin.tracking.index',compact('chart','track',));
+    return view('admin.tracking.index',compact('chart','track'));
     }
 }

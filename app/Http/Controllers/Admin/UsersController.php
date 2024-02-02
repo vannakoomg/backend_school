@@ -10,6 +10,9 @@ use App\Role;
 use App\SchoolClass;
 use App\User;
 use App\Course;
+use App\Parents;
+use App\Sibling;
+use App\StudyHistory;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -88,7 +91,7 @@ class UsersController extends Controller
 	];
 
 //	dd($campus);
-       
+
         return view('admin.users.index', compact('campus','current_filter'));
     }
 
@@ -123,7 +126,6 @@ class UsersController extends Controller
     
         $schoolClasses = SchoolClass::where('campus',$selected_campus->campus)->orderBy('name','asc')->get();
     
-       
         $users = User::whereHas('roles', function ($query){
                 $query->whereId(4);
             })->whereHas('class', function($query) use ($selected_class){
@@ -170,12 +172,12 @@ class UsersController extends Controller
 
     public function store(StoreUserRequest $request)
     {
+        // $formData = $request->all();
        
         $data=(array) $request->all();
-
+        // return $data;
         if(in_array(3,$request->input('roles', [])))
             unset($data['class_id']);
-      
         if(in_array(3,$request->input('roles', [])))
             unset($data['course_id']);
         
@@ -245,13 +247,47 @@ class UsersController extends Controller
         $user->roles()->sync($request->input('roles', []));
         $user->classteacher()->sync($request->input('class_id', []));
         $user->courseteacher()->sync($request->input('course_id', []));
-        
-
+        $dataParent = json_decode($data['tableParent'], true);
+        $dataSibling =json_decode($data['tableSibling'],true);
+        $dataStudyHistory=json_decode($data['tableStudyHistory'],true);
+        foreach($dataParent as  $parent){
+            $p = Parents::create([
+                "user_id"=>$user->id,
+                "type"=>$parent[0],
+                "name"=>$parent[1],
+                "nationality"=>$parent[2],
+                "work_address"=>$parent[3], 
+                "phone_number"=>$parent[4],
+                "email_address"=>$parent[5]
+            ]);
+        }
+        foreach($dataSibling as $sibling){
+            $s = Sibling::create([
+                "user_id"=>$user->id,
+                "family_name"=>$sibling[0],
+                "first_name"=>$sibling[1],
+                "birth_date"=>$sibling[2],
+                "level"=>$sibling[3],
+                "school"=>$sibling[4],
+            ]);
+        }
+        foreach($dataStudyHistory as $studyhistory){
+            $sh = StudyHistory::create([
+                "user_id"=>$user->id,
+                "school_name"=>$studyhistory[0],
+                "location"=>$studyhistory[1],
+                "language"=>$studyhistory[2],
+                "level"=>$studyhistory[3],
+                "start_date"=>$studyhistory[4],
+                "end_date"=>$studyhistory[5],
+        ]);
+        }
         return redirect()->route('admin.users.index',['role' => $user->roles->contains(3)?3:($user->roles->contains(4)?4:0)]);
     }
 
     public function edit(User $user)
     {
+        
         abort_if(Gate::denies('school-setup') && Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $courses = Course::select(DB::raw("CONCAT(language,'-',name) as newname"),'id')->orderBy('language','asc')->orderBy('name','asc')->get()->pluck('newname', 'id'); //prepend(trans('global.pleaseSelect'), '');
@@ -260,10 +296,13 @@ class UsersController extends Controller
         $classes = SchoolClass::select(DB::raw("CONCAT(name,'-', campus) as newname"),'id')->get()->pluck('newname', 'id'); //prepend(trans('global.pleaseSelect'), '');
 
         $user->load('roles', 'class');
-
         $collection_guardian = Arr::prepend($this->collection_guardian, 'Select One Item');
         
-        return view('admin.users.edit', compact('roles', 'classes','courses', 'user','collection_guardian'));
+        $parents= $user->parent;
+        $sibling= $user->sibling;
+        $studyHistory = $user->studyHistory;
+
+        return view('admin.users.edit',compact('roles', 'classes','courses','user','collection_guardian','parents','sibling','studyHistory'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -322,7 +361,7 @@ class UsersController extends Controller
         }
 
         $data=(array) $request->all();
-
+        // return $data;
         if(in_array(3,$request->input('roles', []))){
             unset($data['class_id']);
             unset($data['course_id']);
@@ -338,7 +377,44 @@ class UsersController extends Controller
             $user->courseteacher()->sync($request->input('course_id', []));
 
         }
-
+        Parents::where('user_id',$user->id)->delete();
+        Sibling::where('user_id',$user->id)->delete();
+        StudyHistory::where('user_id',$user->id)->delete();
+        $dataParent = json_decode($data['tableParent'], true);
+        $dataSibling =json_decode($data['tableSibling'],true);
+        $dataStudyHistory=json_decode($data['tableStudyHistory'],true);
+        foreach($dataParent as  $parent){
+            $p = Parents::create([
+                "user_id"=>$user->id,
+                "type"=>$parent[0],
+                "name"=>$parent[1],
+                "nationality"=>$parent[2],
+                "work_address"=>$parent[3], 
+                "phone_number"=>$parent[4],
+                "email_address"=>$parent[5]
+            ]);
+        }
+        foreach($dataSibling as $sibling){
+            $s = Sibling::create([
+                "user_id"=>$user->id,
+                "family_name"=>$sibling[0],
+                "first_name"=>$sibling[1],
+                "birth_date"=>$sibling[2],
+                "level"=>$sibling[3],
+                "school"=>$sibling[4],
+            ]);
+        }
+        foreach($dataStudyHistory as $studyhistory){
+            $sh = StudyHistory::create([
+                "user_id"=>$user->id,
+                "school_name"=>$studyhistory[0],
+                "location"=>$studyhistory[1],
+                "language"=>$studyhistory[2],
+                "level"=>$studyhistory[3],
+                "start_date"=>$studyhistory[4],
+                "end_date"=>$studyhistory[5],
+        ]);
+        }
         //return redirect()->route('admin.users.index');
         if(in_array(4,$request->roles))
             return redirect()->route('admin.users.index',['role'=>4,'campus'=>$user->class->campus]);
