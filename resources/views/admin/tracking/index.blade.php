@@ -5,23 +5,51 @@
             Track When User Click On Menu
         </div>
         <div class="card-body">
-
             <div class="container-fluid text-center">
                 <div class="row align-items-start">
+                    <form action="{{ route('admin.tracking.index') }}">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group text-left">
+                                    <label class="required" for="from_date">From Date </label>
+                                    <input id="from_date" name="from_date" type="text"
+                                        class="form-control datetimepicker {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                        value="{{ $fromDate }}" required>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group text-left">
+                                    <label for="end_date" class="required">End Date </label>
+                                    <input id="end_date" name="end_date" type="text"
+                                        class="form-control datetimepicker {{ $errors->has('name') ? 'is-invalid' : '' }}",
+                                        value="{{ $endDate }}" required>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <label for="end_date">Search </label>
+                                <button class="btn btn-success " type="submit" class="form-control">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
                     <div class="col-8">
                         <canvas id="chart"></canvas>
                     </div>
-                    <div class="col-4 align-self-center">
-                        Summary
-                        <canvas id="chartPie" class=""></canvas>
-                    </div>
+                    @if ($chart['mc'] != 0 || $chart['cc'] != 0)
+                        <div class="col-4 align-self-center">
+                            Summary
+                            <canvas id="chartPie" class=""></canvas>
+                        </div>
+                    @endif
+
+
                 </div>
             </div>
 
             <div class="table-responsive">
-                <form action="{{ route('admin.tracking.index') }}">
 
-                </form>
                 <table class=" table table-sm table-bordered table-striped table-hover datatable datatable-SchoolClass">
                     <thead>
                         <tr>
@@ -70,7 +98,6 @@
                 data: {
                     labels: ["MC:  {{ $chart['mc'] }}", "CC :  {{ $chart['cc'] }}"],
                     datasets: [{
-                        // label: ["jdfkdsjf", "dsfdsaf"],
                         backgroundColor: [
                             'rgba(134, 39, 39, 1)',
                             'rgba(49, 150, 54, 1)',
@@ -87,13 +114,12 @@
                 type: 'bar',
                 data: {
                     labels: [
-                        "News", "Attendance", "Timetable", "Exam Schedules",
+                        "News", "Attendance", "Timetable", "Exam Schedule",
                         "Report Card", "Events", "Gallery", "Assignments",
-                        "Assignment Results", "Pick Up", "E-Leaning",
-                        "Feeback", "Canteen", "Contact Us", "About Us", "Profile", "Notification"
+                        "Assignment Results", "Pick Up", "E-Learning",
+                        "Feedback", "Canteen", "Contact Us", "About Us", "Profile", "Notification"
                     ],
                     datasets: [{
-
                         label: 'Click',
                         backgroundColor: [
                             'rgba(226, 92, 40, 1)',
@@ -117,21 +143,22 @@
                         ],
                         borderColor: 'rgb(47, 128, 237)',
                         data: [
-                            {{ $chart['new'] }},
-                            {{ $chart['attendance'] }},
+                            {{ $chart['announcement'] }} ?? 1,
+                            {{ $chart['attendance_calendar'] }},
                             {{ $chart['timetable'] }},
-                            {{ $chart['examSchendules'] }},
-                            {{ $chart['reportCart'] }},
+                            {{ $chart['exam_schedule'] }},
+                            {{ $chart['student_report'] }},
                             {{ $chart['events'] }},
-                            {{ $chart['gallery'] }},
-                            {{ $chart['assignments'] }},
-                            {{ $chart['assignmentResults'] }},
-                            {{ $chart['pickup'] }},
-                            {{ $chart['elearing'] }},
+                            {{ $chart['gallary'] }},
+                            {{ $chart['homeworks'] }},
+                            {{ $chart['class_results'] }},
+                            {{ $chart['pick_up_card'] }},
+                            {{ $chart['e_learning'] }},
                             {{ $chart['feedback'] }},
                             {{ $chart['canteen'] }},
-                            {{ $chart['contactUs'] }},
-                            {{ $chart['aboutUs'] }},
+                            {{ $chart['contact us'] }},
+
+                            {{ $chart['about us'] }},
                             {{ $chart['profile'] }},
                             {{ $chart['notification'] }},
 
@@ -188,6 +215,7 @@
                     format: 'YYYY/MM/DD'
                 });
             });
+
         })
     </script>
 @endsection

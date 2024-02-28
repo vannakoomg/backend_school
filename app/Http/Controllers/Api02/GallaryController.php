@@ -27,29 +27,29 @@ class GallaryController extends Controller
                     "id"=>$gal->id,
                         "title"=>$gal->name,
                         "image"=> $image,
-                        "date"=>$time->format('Y-m-d'),
+                        "date"=>$time->format('Y-M-d'),
                 ],);
             $galddd = collect([]);
             $galddd->push([
                     "id"=>$gal->id,
                         "title"=>$gal->name,
                         "image"=> $image,
-                        "date"=>$time->format('Y-m-d'),
+                        "date"=>$time->format('Y-M-d'),
                 ],);
             if($data->isEmpty()){
                 $data->push([
-                "year_month"=>$time->format('Y-m'),
+                "year_month"=>$time->format('M-Y'),
                 "gallary"=>$galddd,
             ]);
             }else{
                 $isdulicat =0;
                 foreach($data as $key =>$dataAll){
-                    if($data[$key]["year_month"]==$time->format('Y-m')){
+                    if($data[$key]["year_month"]==$time->format('M-Y')){
                     $data[$key]['gallary']->push([
                         "id"=>$gal->id,
                         "title"=>$gal->name,
                         "image"=> $image,
-                        "date"=>$time->format('Y-m-d'),
+                        "date"=>$time->format('Y-M-d'),
                     ]);
                     $isdulicat =1;
                     break 1;
@@ -57,7 +57,7 @@ class GallaryController extends Controller
             }
             if( $isdulicat ==0){
                 $data->push([
-                "year_month"=>$time->format('Y-m'),
+                "year_month"=>$time->format('M-Y'),
                 "gallary"=>$galddd
             ]);}
             }
@@ -81,4 +81,5 @@ class GallaryController extends Controller
             "data02"=>$data02
         ]);
     }
+   
 }

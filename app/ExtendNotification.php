@@ -22,12 +22,12 @@ class ExtendNotification extends DatabaseNotification
 
 
     public function getDateAttribute(){
-        return $this->created_at ? Carbon::parse($this->created_at)->format('d/m/Y') : null;
+        return $this->created_at ? Carbon::parse($this->created_at)->format('d/M/Y') : null;
     }
 
     public function getCreatedAtAttribute($date){
         
-     
+
         return Carbon::createFromTimestamp(strtotime($date))
                 ->timezone('Asia/Phnom_Penh')
                 ->toDateTimeString();

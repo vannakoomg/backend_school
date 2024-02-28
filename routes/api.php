@@ -98,6 +98,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 });
 
 Route::get('/events', [EventsController::class, 'getEvent']);
+Route::post('/destroy', [EventsController::class, 'destroy']);
+
+
 Route::get('/gallary', [GallaryController::class, 'getGallary']);
 Route::post('/student',[UsersApiController::class,'updateStudent']);
 Route::post('/tracking',[TrackMenuMobileController::class,'create']);

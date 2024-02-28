@@ -20,7 +20,7 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label class="required" for="to_date">End Date </label>
-                            <input id="id" name="end_date" type="text"
+                            <input id="end_date" name="end_date" type="text"
                                 class="form-control datetimepicker {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                 value="{{ old('name', '') }}" required>
                         </div>
@@ -59,6 +59,12 @@
 @section('scripts')
     @parent
     <script>
+        const startDateInput = document.getElementById('startdate');
+        const endDateInput = document.getElementById('end_date');
+        startDateInput.addEventListener('blur', function() {
+            const startDateValue = startDateInput.value;
+            endDateInput.value = startDateValue;
+        });
         $(function() {
             $('.datetimepicker').datetimepicker({
                 format: 'YYYY/MM/DD'

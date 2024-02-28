@@ -34,7 +34,7 @@ class Announcement extends Model
 
 
     public function getDateAttribute(){
-        return $this->created_at ? Carbon::parse($this->created_at)->format('d/m/Y') : null;
+        return $this->created_at ? Carbon::parse($this->created_at)->format('d/M/Y') : null;
     }
 
     public function classes(){
@@ -50,7 +50,7 @@ class Announcement extends Model
     }
 
     public function getUpdatedAtAttribute($value){
-        return $value ? Carbon::parse($value)->format('d/m/Y') : null;
+        return $value ? Carbon::parse($value)->format('d/M/Y') : null;
     }
 
 }

@@ -77,7 +77,6 @@ class NotificationApiController extends Controller
     }
 
     public function getNotificationDetail(Request $request){
-
         if(!$request->has('trid'))
             return response()->json(['status'=>false,'message'=>'Notitication ID is Required for this API.','data'=>[]], 401);
         

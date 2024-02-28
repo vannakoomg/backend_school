@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api02;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+
 use Illuminate\Http\Request;
 use DateTime;
 use Carbon\Carbon;
@@ -11,6 +13,8 @@ use App\Event;
 class EventsController extends Controller
 {
     public function getEvent(Request $request){
+        Log::channel('custom')->info('This is a custom log message.');
+
     $stop = new DateTime($request->start);
     $lastDayOfMonth = Carbon::parse($stop)->endOfMonth()->modify('+ 1day');
     $event =  Event::orderBy('start', 'ASC')->get();
@@ -54,10 +58,10 @@ class EventsController extends Controller
                 "data"=>$allEvent
             ],);
     } 
-    public function truncateTable()
-    {
-        EventsType::truncate();
-        Event::truncate();
-        return response()->json(['message' => 'Table  Event Type and Events truncated successfully']);
-    }  
+    
+    public function destroy(){
+    $result = Event::first();
+    $u= $result->delete();
+    return $u;
+    }
 }

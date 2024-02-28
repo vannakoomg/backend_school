@@ -106,7 +106,7 @@ class User extends Authenticatable
 
     public function getEmailVerifiedAtAttribute($value)
     {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+        return $value ? Carbon::createFromFormat('Y-M-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
     }
 
     public function setEmailVerifiedAtAttribute($value)
@@ -244,11 +244,11 @@ class User extends Authenticatable
 
     if(empty($check_in))
 	    return ['date'=>$date,'check_in'=>'','check_out'=>''];
-    return ['date' => $check_in->date->format('d/m/Y'),'check_in'=> $check_in->date->format('h:i A'), 'check_out' =>(($check_in!=$check_out) ?  $check_out->date->format('h:i A'):'')];
+    return ['date' => $check_in->date->format('d/M/Y'),'check_in'=> $check_in->date->format('h:i A'), 'check_out' =>(($check_in!=$check_out) ?  $check_out->date->format('h:i A'):'')];
     }
     
     public function getAttendance($date){
-        $att = Attendance::where('student_id',$this->id)->whereDate('date', date_format(date_create($date),'Y-m-d'))->first();
+        $att = Attendance::where('student_id',$this->id)->whereDate('date', date_format(date_create($date),'Y-M-d'))->first();
         if($att)
             return $att->status;
         else
@@ -256,7 +256,7 @@ class User extends Authenticatable
     }
 
     public function getRemark($date){
-        $att = Attendance::where('student_id',$this->id)->whereDate('date', date_format(date_create($date),'Y-m-d'))->first();
+        $att = Attendance::where('student_id',$this->id)->whereDate('date', date_format(date_create($date),'Y-M-d'))->first();
         if($att)
             return $att->remark;
         else

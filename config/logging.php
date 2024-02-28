@@ -99,6 +99,11 @@ return [
         'bugsnag' => [
             'driver' => 'bugsnag',
         ],
+        'custom' => [
+        'driver' => 'single',
+        'path' => storage_path('logs/custom.log'),
+        'level' => 'debug',
+    ],
     ],
 
 ];
