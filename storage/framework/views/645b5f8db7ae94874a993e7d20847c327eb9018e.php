@@ -122,7 +122,8 @@
 <?php $__env->startSection('content'); ?>
     <div class="card">
         <div class="card-header">
-            <?php echo e(trans('global.edit'), false); ?>sdsdfsdfdsaf
+            <?php echo e(trans('global.edit'), false); ?>
+
             <?php echo e($user->roles->contains(3) ? 'Teacher' : ($user->roles->contains(4) ? 'Student' : trans('cruds.user.title_singular')), false); ?>
 
         </div>
@@ -407,9 +408,17 @@
                     <div class="row">
                         <div class="col-2 text-center">
                             <div class="form-group">
-                                <img src="<?php echo e($user->guardian1 ? asset('storage/photo/' . "{$user->id}_guardian1.png" ?? '') : asset('storage/image/guardian-avatar.png'), false); ?>"
-                                    class="img-thumbnail btn btn-outline-primary" id="collect_thumbnail1"
-                                    alt="select thumbnail" width="150px" height="150px">
+                                <div style="position: relative; display: inline-block;">
+                                    <img src="<?php echo e($user->guardian1 ? asset('storage/photo/' . $user->id . '_guardian1.png') : asset('storage/image/guardian-avatar.png'), false); ?>"
+                                        class="img-thumbnail btn btn-outline-primary" alt="select thumbnail"
+                                        width="150px" height="150px">
+                                    <div style="position: absolute; top: 5px; right: 5px;">
+                                        <a href="#" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-times"></i>
+                                            <!-- Assuming FontAwesome is used for the "X" icon -->
+                                        </a>
+                                    </div>
+                                </div>
                                 <input type="file" id="collect_imgupload1" name="collect_imgupload1"
                                     style="display:none" />
                             </div>
@@ -971,6 +980,21 @@
     <script type="text/javascript" src="<?php echo e(asset('js/jquery.rfid.js'), false); ?>"></script>
     <?php echo \Illuminate\View\Factory::parentPlaceholder('scripts'); ?>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let removeLinks = document.querySelectorAll(".remove-image");
+            removeLinks.forEach(function(link) {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    let userId = this.getAttribute('data-id');
+                    let imageElement = document.querySelector(`img[data-id="${userId}"]`);
+
+                    if (confirm('Are you sure you want to remove this image?')) {
+                        // Remove the image element
+                        imageElement.remove();
+                    }
+                });
+            });
+        });
         $(function() {
             $('.datetimepicker').datetimepicker({
                 format: 'YYYY/MM/DD'

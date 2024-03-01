@@ -7,7 +7,7 @@
             --link-icon-translate: -20px;
             --link-icon-opacity: 0;
             position: relative;
-            border-radius: 16px;
+            border-radius: 8px;
             box-shadow: none;
             background: #fff;
             transform-origin: center;
@@ -51,9 +51,13 @@
 
         .article-body {
             padding: 10px;
-            /* overflow: hidden; */
+            max-height: 55px;
+            min-height: 55px;
+            overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            /* -webkit-line-clamp: 2; */
         }
 
         article a {
@@ -117,6 +121,7 @@
                 grid-template-columns: 20px 1fr;
                 gap: 15px;
 
+
             }
 
 
@@ -152,7 +157,7 @@
         </div>
         <div class="card-body bg-instagram">
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_class_create')): ?>
-                <div style="margin-bottom: 20px;" class="row">
+                <div style="margin-bottom: 10px;" class="row">
                     <div class="col-lg-12">
                         <a class="btn btn-success" href="<?php echo e(route('admin.gallary.create'), false); ?>">
                             Add
@@ -164,30 +169,40 @@
                 <div>
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <div><?php echo e($value['year_month'], false); ?></div>
+                            <h4 style="color: #ffffff; margin-top: 10px;"><?php echo e($value['year_month'], false); ?></h4>
                             <div class="d-flex flex-wrap">
                                 <?php $__currentLoopData = $value['gallary']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value02): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <div class="w-25 pb-2">
+                                    <div class="w-25 pb-2 article-wrapper">
                                         <article class="mr-3 mb-1">
-                                            <div class="article-wrapper mr-0">
+                                            <div class="">
                                                 <figure>
                                                     <img src=<?php echo e($value02['image'], false); ?> alt="" />
                                                 </figure>
-                                                <div class="article-body">
-                                                    <h2> <?php echo e($value02['title'], false); ?></h2>
+                                                <h5 class="article-body">
+                                                    sadfhs;adjfsajf;lsajf;ajdsl;kjfdsa;dsa
+                                                    <?php echo e($value02['title'], false); ?>
+
+                                                </h5>
+                                                <div class="mb-2 ml-2">
+                                                    <form class="w-75" method="POST"
+                                                        action="<?php echo e(route('admin.gallary.destroyGallary'), false); ?>"
+                                                        onsubmit="return confirm('<?php echo e(trans('global.areYouSure'), false); ?>');"
+                                                        enctype="multipart/form-data">
+                                                        <?php echo csrf_field(); ?>
+
+                                                        <form>
+
 
                                                 </div>
+
+
                                             </div>
                                         </article>
-                                        <form class="w-75" method="POST" action="<?php echo e(route('admin.gallary.destroyGallary'), false); ?>"
-                                            onsubmit="return confirm('<?php echo e(trans('global.areYouSure'), false); ?>');"
-                                            enctype="multipart/form-data">
-                                            <?php echo csrf_field(); ?>
-                                            <button class="btn btn-xs btn-danger" name="id"
-                                                value=<?php echo e($value02['id'], false); ?>>Delete</button>
-                                            <form>
-                                                <a class="btn btn-xs btn-facebook"
-                                                    href="<?php echo e(route('admin.gallary.edit', $value02['id']), false); ?>">Edit</a>
+                                        <button class="btn btn-xs btn-danger " name="id"
+                                            value=<?php echo e($value02['id'], false); ?>>Delete</button>
+                                        <a class="btn btn-xs btn-facebook"
+                                            href="<?php echo e(route('admin.gallary.edit', $value02['id']), false); ?>">Edit</a>
+
 
                                     </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

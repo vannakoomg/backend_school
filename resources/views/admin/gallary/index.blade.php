@@ -7,7 +7,7 @@
             --link-icon-translate: -20px;
             --link-icon-opacity: 0;
             position: relative;
-            border-radius: 16px;
+            border-radius: 8px;
             box-shadow: none;
             background: #fff;
             transform-origin: center;
@@ -51,9 +51,13 @@
 
         .article-body {
             padding: 10px;
-            /* overflow: hidden; */
+            max-height: 55px;
+            min-height: 55px;
+            overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            /* -webkit-line-clamp: 2; */
         }
 
         article a {
@@ -117,6 +121,7 @@
                 grid-template-columns: 20px 1fr;
                 gap: 15px;
 
+
             }
 
 
@@ -152,7 +157,7 @@
         </div>
         <div class="card-body bg-instagram">
             @can('school_class_create')
-                <div style="margin-bottom: 20px;" class="row">
+                <div style="margin-bottom: 10px;" class="row">
                     <div class="col-lg-12">
                         <a class="btn btn-success" href="{{ route('admin.gallary.create') }}">
                             Add
@@ -164,30 +169,38 @@
                 <div>
                     <div class="d-flex flex-column bd-highlight mb-3">
                         @foreach ($data as $value)
-                            <div>{{ $value['year_month'] }}</div>
+                            <h4 style="color: #ffffff; margin-top: 10px;">{{ $value['year_month'] }}</h4>
                             <div class="d-flex flex-wrap">
                                 @foreach ($value['gallary'] as $value02)
-                                    <div class="w-25 pb-2">
+                                    <div class="w-25 pb-2 article-wrapper">
                                         <article class="mr-3 mb-1">
-                                            <div class="article-wrapper mr-0">
+                                            <div class="">
                                                 <figure>
                                                     <img src={{ $value02['image'] }} alt="" />
                                                 </figure>
-                                                <div class="article-body">
-                                                    <h2> {{ $value02['title'] }}</h2>
+                                                <h4 class="article-body">
+                                                    {{ $value02['title'] }}
+                                                </h4>
+                                                <div class="mb-2 ml-2">
+                                                    <form class="w-75" method="POST"
+                                                        action="{{ route('admin.gallary.destroyGallary') }}"
+                                                        onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+
+                                                        <form>
+
 
                                                 </div>
+
+
                                             </div>
                                         </article>
-                                        <form class="w-75" method="POST" action="{{ route('admin.gallary.destroyGallary') }}"
-                                            onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <button class="btn btn-xs btn-danger" name="id"
-                                                value={{ $value02['id'] }}>Delete</button>
-                                            <form>
-                                                <a class="btn btn-xs btn-facebook"
-                                                    href="{{ route('admin.gallary.edit', $value02['id']) }}">Edit</a>
+                                        <button class="btn btn-xs btn-danger " name="id"
+                                            value={{ $value02['id'] }}>Delete</button>
+                                        <a class="btn btn-xs btn-facebook"
+                                            href="{{ route('admin.gallary.edit', $value02['id']) }}">Edit</a>
+
 
                                     </div>
                                 @endforeach

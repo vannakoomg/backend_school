@@ -29,7 +29,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class UsersController extends Controller
 {
 
-    private $collection_guardian =['Father','Mother','Relative'];
+    private $collection_guardian =['Fathdddder','dddMother','Reladddtive'];
 
 
     public function student_promote(Request $request){

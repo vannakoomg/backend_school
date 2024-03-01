@@ -76,6 +76,7 @@ class GallaryController extends Controller
             'event_date' => 'required',
             'file' => 'required',
             
+            
         ],$messages);
         $data = array(
             "name"=>$request->title,
@@ -86,8 +87,8 @@ class GallaryController extends Controller
         $data = $request->file('file');
         foreach ($data as $files) {
         $filename = "image-".time().'.'.$files->getClientOriginalName();
-        $image = \Image::make(file_get_contents($files));
-        $image->save(\storage_path('app/public/image/'.$filename),"15");
+        $image = Image::make(file_get_contents($files));
+        $image->save(storage_path('app/public/image/'.$filename),"15");
         GallaryDetile::create([
             'filename' =>  $filename,
             "gallary_id"=>$lastId->id,

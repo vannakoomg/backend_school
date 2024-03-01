@@ -122,7 +122,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            {{ trans('global.edit') }}sdsdfsdfdsaf
+            {{ trans('global.edit') }}
             {{ $user->roles->contains(3) ? 'Teacher' : ($user->roles->contains(4) ? 'Student' : trans('cruds.user.title_singular')) }}
         </div>
         <div class="card-body">
@@ -396,9 +396,9 @@
                     <div class="row">
                         <div class="col-2 text-center">
                             <div class="form-group">
-                                <img src="{{ $user->guardian1 ? asset('storage/photo/' . "{$user->id}_guardian1.png" ?? '') : asset('storage/image/guardian-avatar.png') }}"
+                                {{-- <img src="{{ $user->guardian1 ? asset('storage/photo/' . "{$user->id}_guardian1.png" ?? '') : asset('storage/image/guardian-avatar.png') }}"
                                     class="img-thumbnail btn btn-outline-primary" id="collect_thumbnail1"
-                                    alt="select thumbnail" width="150px" height="150px">
+                                    alt="select thumbnail" width="150px" height="150px"> --}}
                                 <input type="file" id="collect_imgupload1" name="collect_imgupload1"
                                     style="display:none" />
                             </div>

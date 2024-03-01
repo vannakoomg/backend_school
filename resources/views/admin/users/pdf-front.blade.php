@@ -6701,7 +6701,7 @@
                   </div>
                
                 @endif
-                <h3 class="text-center" style="color:rgba(18, 18, 233, 0.87);margin:0px" ><strong>PICK UP CARD</strong></h3>
+                <h3 class="text-center" style="color:rgba(18, 18, 233, 0.87);margin:0px" ><strong>PICK dddUP CARD</strong></h3>
             
             <table border="0" width="100%" style="padding:0;">
                 <tr>

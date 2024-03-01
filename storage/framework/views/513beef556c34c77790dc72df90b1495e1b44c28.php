@@ -69,7 +69,15 @@
         });
         $(function() {
             $('.datetimepicker').datetimepicker({
-                format: 'YYYY/MM/DD'
+                format: 'YYYY/MM/DD',
+                locale: 'en',
+                sideBySide: true,
+                icons: {
+                    up: 'fas fa-chevron-up',
+                    down: 'fas fa-chevron-down',
+                    previous: 'fas fa-chevron-left',
+                    next: 'fas fa-chevron-right',
+                }
             });;
         });
     </script>

@@ -13,11 +13,17 @@
                     <label class="required" for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" value="<?php echo e($gallary->name, false); ?>" />
                 </div>
-                
                 <div class="form-group mb-4">
                     <label class="required" for="event_date">Event Date </label>
                     <input id="event_date" name="event_date" type="text" class="form-control datetimepicker"
                         value=<?php echo e($gallary->event_date, false); ?>>
+                </div>
+                <div id="loading" style="display: none; color: rgb(23, 188, 23); ">
+                    <strong>Compressing image...</strong>
+                    <div id="progressBarContainer"></div>
+                </div>
+                <div class="dz-message" data-dz-message>
+                    <dev class="btn btn-info mt-4 "> Browse File </dev>
                 </div>
             </form>
             <div class="form-group mb-4"><button class="btn btn-success mt-4" type="submit" id="update-btn">
@@ -38,7 +44,7 @@
             maxFilesize: 100, //maximum file size 2MB
             maxFiles: 100,
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-            dictDefaultMessage: '<dev class="btn btn-info mt-4 " >  Browse File  </dev>',
+            dictDefaultMessage: '',
             dictResponseError: 'Error uploading file!',
             parallelChunkUploads: true,
             createImageThumbnails: true,
@@ -83,6 +89,7 @@
 
                     }
                 });
+                document.querySelector('.dz-message').style.display = 'block';
             },
             removedfile: function(file) {
                 var name = file.filename;
@@ -98,25 +105,88 @@
                     success: function(data) {
                         console.log("successfully removed!!");
                     },
-                    error: function(e) {
-                        console.log("Error removed!!");
-                    }
+
                 });
                 var fileRef;
                 return (fileRef = file.previewElement) != null ?
                     fileRef.parentNode.removeChild(file.previewElement) : void 0;
             },
         });
+        myDropzone.on("addedfile", function(file) {
+            if (file.type.match('image/jpeg') || file.type.match('image/png')) {
+                if (file.size > 1024 * 824) { // Check if file size is greater than 1MB
+                    console.log("image size", file.size);
+                    $('#loading').show(); // Show loading element
+                    compressImage(file, 5000);
+                }
+            }
+            document.querySelector('.dz-message').style.display = 'block';
+
+        });
         myDropzone.on("success", function(file, response) {
             window.location.href = "<?php echo e(URL::to('admin/gallary'), false); ?>"
         });
+        myDropzone.on("error", function(file, errorMessage) {
+            if (errorMessage == "You can't upload files of this type.") {
+                alert("Allow only PNG and JPG");
+                myDropzone.removeFile(file);
+            }
+        });
         $('#update-btn').click(function(e) {
-            if (myDropzone.files.length > 0) {
+            const title = document.getElementById('title').value;
+
+            if (myDropzone.files.length > 0 && title != "") {
                 myDropzone.processQueue();
             } else {
                 $('#dropzone').submit();
             }
         });
+        $('.datetimepicker').datetimepicker({
+            format: 'YYYY/MM/DD',
+            locale: 'en',
+            sideBySide: true,
+            icons: {
+                up: 'fas fa-chevron-up',
+                down: 'fas fa-chevron-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+            }
+        });
+
+        function compressImage(file, maxSizeInKB) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var image = new Image();
+                image.src = event.target.result;
+                image.onload = function() {
+                    var canvas = document.createElement("canvas");
+                    var ctx = canvas.getContext("2d");
+                    var width = image.width;
+                    var height = image.height;
+                    var maxSize = maxSizeInKB * 1024; // Convert KB to bytes
+                    var ratio = 1;
+                    if (width * height > maxSize) {
+                        ratio = Math.sqrt(maxSize / (width * height));
+                    }
+                    canvas.width = width * ratio;
+                    canvas.height = height * ratio;
+                    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                    canvas.toBlob(function(blob) {
+                        var newFile = new File([blob], file.name, {
+                            type: "image/jpeg",
+                            lastModified: Date.now()
+                        });
+                        myDropzone.removeFile(file);
+                        myDropzone.addFile(newFile);
+                        // Replace the original file with the compressed file
+                        $('#loading').hide();
+                    }, "image/jpeg", 0.7); // 0.7 is the JPEG quality, adjust as needed
+                };
+            };
+            reader.readAsDataURL(file);
+            console.log(reader);
+        }
     </script>
 <?php $__env->stopSection(); ?>
 
