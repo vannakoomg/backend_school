@@ -178,11 +178,10 @@
                                                 <figure>
                                                     <img src=<?php echo e($value02['image'], false); ?> alt="" />
                                                 </figure>
-                                                <h5 class="article-body">
-                                                    sadfhs;adjfsajf;lsajf;ajdsl;kjfdsa;dsa
+                                                <h4 class="article-body">
                                                     <?php echo e($value02['title'], false); ?>
 
-                                                </h5>
+                                                </h4>
                                                 <div class="mb-2 ml-2">
                                                     <form class="w-75" method="POST"
                                                         action="<?php echo e(route('admin.gallary.destroyGallary'), false); ?>"

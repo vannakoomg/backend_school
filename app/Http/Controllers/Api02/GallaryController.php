@@ -14,7 +14,8 @@ class GallaryController extends Controller
         $data = collect([]);
         $data02 =collect([]);
         if(empty($request->id)){
-        $gallary = Gallary::all()->sortByDesc('event_date');
+        $gallary = Gallary::orderByDesc('event_date')->paginate(4);  
+
         foreach($gallary as $key =>$gal){
             if(empty( GallaryDetile::all()->where('gallary_id','=',$gal->id)->first()->filename))
             {
@@ -78,6 +79,7 @@ class GallaryController extends Controller
         }
         return response()->json([
             "data"=>$data,
+            "last_page"=>$gallary->lastPage(),
             "data02"=>$data02
         ]);
     }

@@ -12,13 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Image;
 class GallaryController extends Controller
 { 
-    public function index() { 
-        // $gallary = Gallary::all()->sortByDesc('event_date');
-        // $firstImage =collect();
-        // foreach($gallary as $g){
-        //     $data = GallaryDetile::all()->where("gallary_id","=",$g->id)->first();
-        //     $firstImage->push(asset('storage/image/' . $data->filename));
-        // }
+    public function index() {
         $data = collect([]);
         $gallary = Gallary::all()->sortByDesc('event_date');
         foreach($gallary as $key =>$gal){
@@ -87,8 +81,8 @@ class GallaryController extends Controller
         $data = $request->file('file');
         foreach ($data as $files) {
         $filename = "image-".time().'.'.$files->getClientOriginalName();
-        $image = Image::make(file_get_contents($files));
-        $image->save(storage_path('app/public/image/'.$filename),"15");
+        // $image = Image::make(file_get_contents($files));
+        // $image->save(storage_path('app/public/image/'.$filename),"15");
         GallaryDetile::create([
             'filename' =>  $filename,
             "gallary_id"=>$lastId->id,
